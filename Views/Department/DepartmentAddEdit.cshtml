@@ -1,0 +1,41 @@
+@model StudentManagementSystem.Models.Department
+
+<div class="pagetitle">
+    <h1>Add / Edit Department</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Department" asp-action="Index"><i class="fa-solid fa-building"></i> Department</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> Add / Edit Department</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Department" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="DepartmentID" />
+            
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.DepartmentID == 0 ? "Add New Department" : "Edit Department")</span>
+            </div>
+               
+            <div class="col-md-12">
+                <label asp-for="DepartmentName" class="form-label fw-bold">Department Name</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-building text-primary"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter Department Name" asp-for="DepartmentName">
+                </div>
+                <div class="form-text mt-1 text-muted">
+                    <span asp-validation-for="DepartmentName" class="text-danger fw-bold d-block"></span>
+                    e.g., Computer Science, Information Technology, Mechanical Engineering etc.
+                </div>
+            </div>
+                
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Changes</button>
+                <a asp-controller="Department" asp-action="Index" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
