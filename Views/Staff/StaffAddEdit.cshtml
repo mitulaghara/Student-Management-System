@@ -1,0 +1,82 @@
+@model StudentManagementSystem.Models.Staff
+
+<div class="pagetitle">
+    <h1>Add / Edit Staff Member</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Staff" asp-action="StaffList"><i class="fa-solid fa-user-tie"></i> Staff</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> Add / Edit Staff</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Staff" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="StaffID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.StaffID == 0 ? "Add New Staff Member" : "Edit Staff Member Details")</span>
+            </div>
+
+            <!-- Staff Name -->
+            <div class="col-md-6">
+                <label asp-for="StaffName" class="form-label fw-bold">Full Name</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill text-primary"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter Full Name" asp-for="StaffName">
+                </div>
+                <span asp-validation-for="StaffName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6">
+                <label asp-for="DepartmentName" class="form-label fw-bold">Department</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-building text-primary"></i></span>
+                    <select class="form-select" asp-for="DepartmentName">
+                        <option value="">-- Select Department --</option>
+                        @foreach (var dept in ViewBag.Departments)
+                        {
+                            <option value="@dept">@dept</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="DepartmentName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Mobile No -->
+            <div class="col-md-6">
+                <label asp-for="MobileNo" class="form-label fw-bold">Mobile Number</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-telephone-fill text-primary"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter 10-digit number" asp-for="MobileNo">
+                </div>
+                <span asp-validation-for="MobileNo" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Email Address -->
+            <div class="col-md-6">
+                <label asp-for="EmailAddress" class="form-label fw-bold">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill text-primary"></i></span>
+                    <input type="email" class="form-control" placeholder="Enter Email Address" asp-for="EmailAddress">
+                </div>
+                <span asp-validation-for="EmailAddress" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Remarks -->
+            <div class="col-12">
+                <label asp-for="Remarks" class="form-label fw-bold">Remarks / Designation Details</label>
+                <textarea class="form-control" rows="3" placeholder="Enter roles, qualifications, or other details..." asp-for="Remarks"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Changes</button>
+                <a asp-controller="Staff" asp-action="StaffList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

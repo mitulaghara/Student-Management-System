@@ -1,0 +1,82 @@
+@model List<Staff>
+
+<div class="pagetitle">
+    <h1>Staff / Faculty</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item active"><i class="fa-solid fa-user-tie"></i> Staff List</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+@if (ViewBag.IsMock == true)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i>
+        <strong>Running on Mock Data!</strong> Could not connect to your SQL Server database. Please set it up using the SQL script <code>StudentManagementSystem.sql</code>.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="m-2">
+    <div class="bg-primary-subtle rounded row pt-2 pb-2 align-items-center">
+        <div class="col-7"></div>
+        <div class="col-5 text-end pe-4">
+            <a asp-controller="Staff" asp-action="StaffAddEdit" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i> Add Staff Member</a>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Staff / Faculty Directory</h5>
+
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Staff ID</th>
+                                <th>Staff Name</th>
+                                <th>Department Name</th>
+                                <th>Mobile No</th>
+                                <th>Email Address</th>
+                                <th>Remarks</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.StaffID</td>
+                                    <td><strong>@item.StaffName</strong></td>
+                                    <td>@item.DepartmentName</td>
+                                    <td>@item.MobileNo</td>
+                                    <td><a href="mailto:@item.EmailAddress">@item.EmailAddress</a></td>
+                                    <td>@(string.IsNullOrEmpty(item.Remarks) ? "--" : item.Remarks)</td>
+                                    <td class="text-center">
+                                        <a asp-controller="Staff" asp-action="StaffAddEdit" asp-route-id="@item.StaffID" class="text-warning me-3" title="Edit Staff Details">
+                                            <i class="bi bi-pencil-square fs-5"></i>
+                                        </a>
+                                        <a asp-controller="Staff" asp-action="Delete" asp-route-id="@item.StaffID" class="text-danger" title="Delete Staff Member"
+                                           onclick="return confirm('Are you sure you want to delete this staff member?')">
+                                            <i class="bi bi-trash fs-5"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
