@@ -1,0 +1,44 @@
+@model StudentManagementSystem.Models.Course
+
+<div class="pagetitle">
+    <h1>Add / Edit Course</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Course" asp-action="CourseList"><i class="fa-solid fa-graduation-cap"></i> Course</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> Add / Edit Course</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Course" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="CourseID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.CourseID == 0 ? "Add New Course" : "Edit Course Details")</span>
+            </div>
+
+            <div class="col-md-12">
+                <label asp-for="CourseName" class="form-label fw-bold">Course Name</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-graduation-cap text-primary"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter Course Title" asp-for="CourseName">
+                </div>
+                <span asp-validation-for="CourseName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Remarks" class="form-label fw-bold">Remarks / Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter syllabus highlights or remarks..." asp-for="Remarks"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Changes</button>
+                <a asp-controller="Course" asp-action="CourseList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
