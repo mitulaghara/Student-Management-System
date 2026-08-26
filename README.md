@@ -1,118 +1,194 @@
-# Student Management System (SMS)
+<div align="center">
 
-> **Course**: .NET Technologies (01CE1523) – B.Tech Semester 5 (CSE)  
-> **Institution**: Marwadi University – Faculty of Engineering and Technology (Department of Computer Engineering)  
+# 🎓 Student Management System (SMS)
+### *A Modern, Enterprise-Grade Academic ERP Portal*
 
----
+[![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-blue?style=for-the-badge&logo=csharp&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet/mvc)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas%20Cloud-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-## 📌 Project Overview & Problem Statement
-
-Traditional academic record-keeping in educational institutions often relies on fragmented manual processes, leading to data redundancy, delays in course enrollment tracking, and inefficient faculty-student mentorship monitoring. 
-
-The **Student Management System (SMS)** is a modern, enterprise-grade web application built using **ASP.NET Core MVC** and **C#**. It provides a unified digital portal to manage Departments, Academic Courses, Classrooms, Faculty Members, Student Enrollment Profiles, and Advising Assignments with real-time graphical analytics.
-
----
-
-## 🎯 Objectives
-
-1. **Centralized Data Management**: Digitize and maintain records for Departments, Staff, Courses, Classrooms, Students, and Mentorship Enrollments.
-2. **Secure Session-Based Authentication**: Enforce custom `[CheckAccess]` authorization filter for protected portal areas.
-3. **Hybrid Database Architecture**: Support **SQL Server via ADO.NET Stored Procedures** as well as **MongoDB Atlas Cloud Database**, with automated mock fallback for offline development.
-4. **Rich Interactive Analytics**: Provide an executive dashboard with key metric cards and interactive Google Pie Charts.
-5. **Responsive Modern UI**: Built with Bootstrap 5, FontAwesome, Bootstrap Icons, and the NiceAdmin dashboard template.
+<p align="center">
+  <b>B.Tech Computer Science & Engineering — Semester 5 (.NET Technologies)</b><br>
+  <i>Faculty of Engineering and Technology, Marwadi University</i>
+</p>
 
 ---
 
-## 💻 Technology Stack
+</div>
 
-- **Core Framework**: C# (.NET 10.0), ASP.NET Core MVC
-- **Data Access & Storage**:
-  - **ADO.NET** (`System.Data.SqlClient`) with SQL Server Stored Procedures (`StudentManagementSystem.sql`)
-  - **MongoDB Atlas** NoSQL Cloud Database (`MongoDB.Driver`)
-- **Frontend & UI**: HTML5, Vanilla CSS3, Bootstrap 5.3, FontAwesome 6, Bootstrap Icons, Google Charts API
-- **Version Control**: Git & GitHub
-
----
-
-## ⚙️ Key Features & Modules
-
-1. **Authentication & Session Control**:
-   - Secure login portal with Anti-Forgery Token protection.
-   - Dynamic user profile header displaying active session details.
-
-2. **Department Management**:
-   - Complete CRUD operations for engineering/academic departments.
-
-3. **Faculty / Staff Directory**:
-   - Manage faculty profiles, designations, mobile numbers, emails, and department associations.
-
-4. **Classroom & Lab Allocation**:
-   - Track lab allocations, seminar halls, and lecture classrooms.
-
-5. **Course & Academic Program Management**:
-   - Manage offered courses, syllabus remarks, and course codes.
-
-6. **Student Record Management**:
-   - Maintain student enrollment records, roll numbers, contact details, birth dates, assigned classrooms, and active/dropped status.
-
-7. **Student-Faculty Advising & Mentorship**:
-   - Map students to dedicated faculty advisors with status tracking and remarks.
-
-8. **Executive Dashboard**:
-   - Summary counter widgets and a dynamic Google Chart for department-wise student distribution.
+## 📖 Table of Contents
+- [📌 Overview & Problem Statement](#-overview--problem-statement)
+- [✨ Key Features](#-key-features)
+- [🛠️ System Architecture & Tech Stack](#️-system-architecture--tech-stack)
+- [📂 Project Directory Structure](#-project-directory-structure)
+- [🚀 Quick Start & Installation](#-quick-start--installation)
+- [🗄️ Database Configuration](#️-database-configuration)
+- [🔐 Access Control & Security](#-access-control--security)
+- [📊 Modules Breakdown](#-modules-breakdown)
+- [👥 Authors & Acknowledgments](#-authors--acknowledgments)
 
 ---
 
-## 🚀 Installation & Execution Steps
+## 📌 Overview & Problem Statement
 
-### Prerequisites
-- [.NET 10.0 SDK](https://dotnet.microsoft.com/download)
-- Visual Studio 2022 / VS Code
-- (Optional) SQL Server Management Studio (SSMS) or MongoDB Atlas Account
+Academic institutions often face data redundancy, fragmented communication channels, and difficulty in real-time reporting due to legacy, manual record systems.
 
-### Quick Start (Command Line)
-1. **Clone the repository**:
+The **Student Management System (SMS)** is an end-to-end web portal engineered with **ASP.NET Core MVC** and **C#**. It streamlines institutional workflows by unifying Department administration, Course scheduling, Classroom logistics, Faculty rosters, Student admissions, and Advisor-Student Mentorship tracking within a single interactive dashboard.
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+| :--- | :--- |
+| 🛡️ **Session-Based Authentication** | Custom authorization filter (`[CheckAccess]`) protecting secured routes with session tokens and Anti-Forgery tokens. |
+| 🏢 **Department Management** | Full CRUD capabilities for academic departments, intake capacity, and contact heads. |
+| 👨‍🏫 **Faculty & Staff Directory** | Comprehensive staff directory tracking designations, contact information, and department affiliations. |
+| 🏫 **Classroom & Lab Allocation** | Monitor facility capacity, room numbers, and laboratory designations. |
+| 📚 **Course Catalog** | Manage syllabus codes, credit weights, and course outlines. |
+| 🎓 **Student Lifecycle Tracking** | Manage roll numbers, personal details, date of birth, and enrollment statuses. |
+| 🤝 **Faculty-Student Advising** | Dynamic mentor-mentee mapping module with active status indicators and progress remarks. |
+| 📈 **Visual Analytics Dashboard** | Real-time counters, status badges, and interactive Google Charts for department-wise student distribution. |
+
+---
+
+## 🛠️ System Architecture & Tech Stack
+
+```mermaid
+graph TD
+    User([🌐 Browser Client]) <--> UI[Bootstrap 5 / Razor Views]
+    UI <--> Controller[ASP.NET Core MVC Controllers]
+    Controller <--> Filter[🔐 CheckAccess Authorization Filter]
+    Controller <--> Service[Services Layer / MongoDbService]
+    Service <--> DB1[(🍃 MongoDB Atlas Cloud)]
+    Service -.-> DB2[(🗄️ SQL Server / ADO.NET)]
+```
+
+### 💻 Technology Breakdown
+
+- **Backend / Web Layer**: ASP.NET Core MVC (.NET 8.0), C# 12
+- **Data Persistence**:
+  - **MongoDB Atlas** (Cloud NoSQL via `MongoDB.Driver 2.28.0`)
+  - **SQL Server** (`Microsoft.Data.SqlClient 5.2.2` with Stored Procedures)
+- **Frontend / Presentation**:
+  - HTML5, CSS3, JavaScript (ES6)
+  - **Bootstrap 5.3**, **NiceAdmin UI**, **Bootstrap Icons**, **FontAwesome 6**
+  - **ApexCharts**, **Chart.js**, and **Google Charts API**
+
+---
+
+## 📂 Project Directory Structure
+
+```text
+Student Management System Using dotNET/
+├── 📁 Controllers/              # MVC Controllers (Auth, Student, Staff, Course, etc.)
+├── 📁 Models/                   # Data Models & ViewModels (Department, Student, etc.)
+├── 📁 Views/                    # Razor View Templates (.cshtml)
+│   ├── 📁 Auth/                 # Login & Registration Pages
+│   ├── 📁 Home/                 # Dashboard with Analytics & Charts
+│   ├── 📁 Student/              # Student List & Add/Edit Forms
+│   ├── 📁 Staff/                # Faculty Directory & Form
+│   ├── 📁 Course/               # Course Management Views
+│   ├── 📁 Department/           # Department Management Views
+│   ├── 📁 Classroom/            # Classroom Allocation Views
+│   ├── 📁 Enrollment/           # Student-Faculty Advising Views
+│   └── 📁 Shared/               # _Layout, Navbar, Sidebar & Partials
+├── 📁 Filters/                  # Custom Authorization Filters (CheckAccess.cs)
+├── 📁 Services/                 # Business & Database Service Layer (MongoDbService.cs)
+├── 📁 wwwroot/                  # Static Assets (CSS, JS, Vendor Libraries, Images)
+├── 📄 appsettings.json          # Configuration & Connection Strings
+├── 📄 Program.cs                # Application Startup & Middleware Pipeline
+├── 📄 StudentManagementSystem.csproj
+└── 📄 README.md
+```
+
+---
+
+## 🚀 Quick Start & Installation
+
+### 📋 Prerequisites
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or higher
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) / [VS Code](https://code.visualstudio.com/) / JetBrains Rider
+- Active Internet Connection (for MongoDB Atlas cloud connection)
+
+### ⚙️ Step-by-Step Setup
+
+1. **Clone the Repository**
    ```bash
-   git clone <your-github-repo-url>
+   git clone https://github.com/mitulaghara/Student-Management-System.git
    cd "Student Management System Using dotNET"
    ```
-2. **Restore dependencies & Build**:
+
+2. **Restore Dependencies & Build**
    ```bash
    dotnet restore
    dotnet build
    ```
-3. **Run the Application**:
+
+3. **Run the Application**
    ```bash
    dotnet run
    ```
-4. **Access in Browser**:
-   Open [http://localhost:5062](http://localhost:5062) in your browser.
 
-5. **Default Login Credentials**:
-   - **Username**: `admin`
-   - **Password**: `admin123`
+4. **Open in Browser**
+   Navigate to: `http://localhost:5062`
 
 ---
 
-## 🗄️ Database Setup Options
+## 🗄️ Database Configuration
 
-### Option A: MongoDB Atlas Cloud (Active Default)
-The application is pre-configured in `appsettings.json` with a MongoDB Atlas cloud connection string. Collections and seed data are automatically initialized on startup.
+### Option A: MongoDB Atlas (Default & Cloud-Ready)
+The application connects automatically to MongoDB Atlas using the configured connection string in `appsettings.json`. Database collections and seed records are automatically initialized on the first application launch.
 
-### Option B: SQL Server (ADO.NET)
-Open SQL Server Management Studio (SSMS) and execute the included [StudentManagementSystem.sql](file:///Users/mitulaghara/Desktop/Student%20Management%20System%20Using%20dotNET/StudentManagementSystem.sql) script to create the database and all stored procedures.
+```json
+"MongoDbSettings": {
+  "ConnectionString": "mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority",
+  "DatabaseName": "StudentManagementDB"
+}
+```
+
+### Option B: Microsoft SQL Server (ADO.NET Stored Procedures)
+1. Execute `StudentManagementSystem.sql` in SQL Server Management Studio (SSMS) to create the schema and stored procedures.
+2. Update the `DefaultConnection` string in `appsettings.json`.
 
 ---
 
-## 👥 Team Members
+## 🔐 Access Control & Security
 
-- **Mitul Aghara** (Lead Developer)
-- **Team Member 2**
-- **Team Member 3**
+- **Default Administrator Credentials**:
+  - **Username**: `admin`
+  - **Password**: `admin123`
+- **Route Guarding**: All operational modules are protected using the `[CheckAccess]` action filter.
+- **CSRF Mitigation**: HTML forms utilize ASP.NET Core built-in Anti-Forgery Tokens (`@Html.AntiForgeryToken()`).
 
 ---
 
-## 📜 License & Copyright
+## 📊 Modules Breakdown
 
-© 2026 **Student Management System**. All Rights Reserved.  
-Designed & Developed by **Mitul Aghara**.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 STUDENT MANAGEMENT PORTAL                   │
+├───────────────┬─────────────────────────────┬───────────────┤
+│ Administration│      Academic Operations    │   Analytics   │
+├───────────────┼─────────────────────────────┼───────────────┤
+│ • Departments │ • Student Admissions        │ • Enrollment  │
+│ • Faculty     │ • Course Catalog            │   Statistics  │
+│ • Classrooms  │ • Advisor Allocations       │ • Visual Pie  │
+│ • Security    │ • Active/Inactive Tracking  │   Charts      │
+└───────────────┴─────────────────────────────┴───────────────┘
+```
+
+---
+
+## 👥 Authors & Acknowledgments
+
+- **Mitul Aghara** — *Lead Developer & Architect* — [GitHub Profile](https://github.com/mitulaghara)
+- **Marwadi University** — *Department of Computer Engineering*
+
+---
+
+<div align="center">
+  <sub>© 2026 <b>Student Management System</b>. Built for .NET Technologies Academic Project.</sub>
+</div>
