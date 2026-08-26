@@ -1,0 +1,76 @@
+@model StudentManagementSystem.Models.Enrollment
+
+<div class="pagetitle">
+    <h1>Add / Edit Advising Assignment</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Enrollment" asp-action="EnrollmentList"><i class="fa-solid fa-users"></i> Enrollments</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> Assign Advisor</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Enrollment" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="EnrollmentID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.EnrollmentID == 0 ? "Assign Advisor to Student" : "Edit Advising Assignment")</span>
+            </div>
+
+            <!-- Student Selection -->
+            <div class="col-md-6">
+                <label asp-for="StudentID" class="form-label fw-bold">Select Student</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user-graduate text-primary"></i></span>
+                    <select class="form-select" asp-for="StudentID">
+                        <option value="">-- Select Student --</option>
+                        @foreach (var std in (List<StudentManagementSystem.Models.Student>)ViewBag.Students)
+                        {
+                            <option value="@std.StudentID">@std.StudentName</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="StudentID" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Staff Selection -->
+            <div class="col-md-6">
+                <label asp-for="StaffID" class="form-label fw-bold">Select Staff / Advisor</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user-tie text-primary"></i></span>
+                    <select class="form-select" asp-for="StaffID">
+                        <option value="">-- Select Staff Advisor --</option>
+                        @foreach (var stf in (List<StudentManagementSystem.Models.Staff>)ViewBag.Staffs)
+                        {
+                            <option value="@stf.StaffID">@stf.StaffName</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="StaffID" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Active Status -->
+            <div class="col-md-12 mt-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="isActiveEnrollmentSwitch" asp-for="IsActive">
+                    <label class="form-check-label fw-bold" for="isActiveEnrollmentSwitch">Active Mentorship / Advising Status?</label>
+                </div>
+            </div>
+
+            <!-- Remarks -->
+            <div class="col-12">
+                <label asp-for="Remarks" class="form-label fw-bold">Remarks / Assignment Notes</label>
+                <textarea class="form-control" rows="3" placeholder="Enter assignment scope, academic project details, or remarks..." asp-for="Remarks"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Assignment</button>
+                <a asp-controller="Enrollment" asp-action="EnrollmentList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
