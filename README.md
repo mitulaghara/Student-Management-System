@@ -182,10 +182,16 @@ The application connects automatically to MongoDB Atlas using the configured con
 
 ---
 
-## 👥 Authors & Acknowledgments
+## 👥 Team Members & Contributors
 
-- **Mitul Aghara** — *Lead Developer & Architect* — [GitHub Profile](https://github.com/mitulaghara)
-- **Marwadi University** — *Department of Computer Engineering*
+| Name | Role | GitHub Profile |
+| :--- | :--- | :--- |
+| **Mitul Aghara** | Lead Developer & Architect | [@mitulaghara](https://github.com/mitulaghara) |
+| **Krisha** | Core Contributor | [@Krisha15607](https://github.com/Krisha15607) |
+| **Harsh Zolapara** | Core Contributor | [@harshzolapara144295-dotcom](https://github.com/harshzolapara144295-dotcom) |
+
+### 🏛️ Institution
+- **Marwadi University** — *Faculty of Engineering and Technology (Department of Computer Engineering)*
 
 ---
 
