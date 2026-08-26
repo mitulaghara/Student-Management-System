@@ -1,0 +1,41 @@
+@model StudentManagementSystem.Models.Classroom
+
+<div class="pagetitle">
+    <h1>Add / Edit Classroom</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Classroom" asp-action="ClassroomList"><i class="fa-solid fa-school"></i> Classroom</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> Add / Edit Classroom</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Classroom" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="ClassroomID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.ClassroomID == 0 ? "Add New Classroom" : "Edit Classroom")</span>
+            </div>
+
+            <div class="col-md-12">
+                <label asp-for="ClassroomName" class="form-label fw-bold">Classroom Name / Room Number</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-school text-primary"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter Classroom Name or Number" asp-for="ClassroomName">
+                </div>
+                <div class="form-text mt-1 text-muted">
+                    <span asp-validation-for="ClassroomName" class="text-danger fw-bold d-block"></span>
+                    e.g., Lab 1 - Ground Floor, Classroom 101, Seminar Hall 3 etc.
+                </div>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Changes</button>
+                <a asp-controller="Classroom" asp-action="ClassroomList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
