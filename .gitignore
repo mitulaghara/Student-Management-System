@@ -10,7 +10,6 @@ obj/
 ## macOS
 .DS_Store
 
-## IDE / Gemini / IDE Cache
-.antigravityignore
-
-## harsh
+## IDE Cache
+.vscode/
+.idea/
