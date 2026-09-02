@@ -22,6 +22,7 @@ namespace StudentManagementSystem.Services
         public IMongoCollection<Student> Students => _database.GetCollection<Student>("Students");
         public IMongoCollection<Enrollment> Enrollments => _database.GetCollection<Enrollment>("Enrollments");
         public IMongoCollection<UserLoginModel> Users => _database.GetCollection<UserLoginModel>("Users");
+        public IMongoCollection<Attendance> Attendances => _database.GetCollection<Attendance>("Attendances");
 
         public void SeedInitialData()
         {
@@ -97,6 +98,17 @@ namespace StudentManagementSystem.Services
                     {
                         new Enrollment { EnrollmentID = 1, StudentID = 1, StudentName = "Maulik Ghara", StaffID = 1, StaffName = "Dr. Ramesh Patel", IsActive = true, Remarks = "Assigned to Senior Advisor", Created = DateTime.Now, Modified = DateTime.Now },
                         new Enrollment { EnrollmentID = 2, StudentID = 2, StudentName = "Aarav Sharma", StaffID = 2, StaffName = "Prof. Sneha Shah", IsActive = true, Remarks = "Assigned to Advisor Sneha", Created = DateTime.Now, Modified = DateTime.Now }
+                    });
+                }
+
+                // Seed Attendances
+                if (Attendances.CountDocuments(FilterDefinition<Attendance>.Empty) == 0)
+                {
+                    Attendances.InsertMany(new[]
+                    {
+                        new Attendance { AttendanceID = 1, StudentID = 1, StudentName = "Maulik Ghara", AttendanceDate = DateTime.Today, Status = "Present", Subject = "Web Development with .NET", Remarks = "", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Attendance { AttendanceID = 2, StudentID = 2, StudentName = "Aarav Sharma", AttendanceDate = DateTime.Today, Status = "Absent", Subject = "Database Management Systems", Remarks = "Medical Leave", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Attendance { AttendanceID = 3, StudentID = 3, StudentName = "Priya Patel", AttendanceDate = DateTime.Today, Status = "Late", Subject = "Object Oriented Programming", Remarks = "Traffic delay", Created = DateTime.Now, Modified = DateTime.Now }
                     });
                 }
             }

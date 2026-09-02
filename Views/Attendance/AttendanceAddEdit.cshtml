@@ -1,0 +1,97 @@
+@model StudentManagementSystem.Models.Attendance
+
+<div class="pagetitle">
+    <h1>Mark / Edit Attendance</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Attendance" asp-action="AttendanceList"><i class="fa-solid fa-clipboard-check"></i> Attendance</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> @(Model.AttendanceID == 0 ? "Mark Attendance" : "Edit Attendance")</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Attendance" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="AttendanceID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.AttendanceID == 0 ? "Mark Student Attendance" : "Edit Attendance Record")</span>
+            </div>
+
+            <!-- Student Selection -->
+            <div class="col-md-6">
+                <label asp-for="StudentID" class="form-label fw-bold">Select Student</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user-graduate text-primary"></i></span>
+                    <select class="form-select" asp-for="StudentID">
+                        <option value="">-- Select Student --</option>
+                        @foreach (var std in (List<StudentManagementSystem.Models.Student>)ViewBag.Students)
+                        {
+                            <option value="@std.StudentID">@std.StudentName</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="StudentID" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Attendance Date -->
+            <div class="col-md-6">
+                <label asp-for="AttendanceDate" class="form-label fw-bold">Attendance Date</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar-date text-primary"></i></span>
+                    <input type="date" class="form-control" asp-for="AttendanceDate" />
+                </div>
+                <span asp-validation-for="AttendanceDate" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Status -->
+            <div class="col-md-6">
+                <label asp-for="Status" class="form-label fw-bold">Attendance Status</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-toggles text-primary"></i></span>
+                    <select class="form-select" asp-for="Status">
+                        <option value="">-- Select Status --</option>
+                        <option value="Present">✅ Present</option>
+                        <option value="Absent">❌ Absent</option>
+                        <option value="Late">⏰ Late</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Status" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Subject -->
+            <div class="col-md-6">
+                <label asp-for="Subject" class="form-label fw-bold">Subject / Course</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-book text-primary"></i></span>
+                    <select class="form-select" asp-for="Subject">
+                        <option value="">-- Select Subject --</option>
+                        @foreach (var course in (List<string>)ViewBag.Courses)
+                        {
+                            <option value="@course">@course</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Remarks -->
+            <div class="col-12">
+                <label asp-for="Remarks" class="form-label fw-bold">Remarks</label>
+                <textarea class="form-control" rows="3"
+                          placeholder="Enter any remarks (e.g., Medical Leave, Family Emergency, etc.)"
+                          asp-for="Remarks"></textarea>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-check2-circle me-1"></i> Save Attendance
+                </button>
+                <a asp-controller="Attendance" asp-action="AttendanceList" class="btn btn-secondary px-4">
+                    <i class="bi bi-x-octagon-fill me-1"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
