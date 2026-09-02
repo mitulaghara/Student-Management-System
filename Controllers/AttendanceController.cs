@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult AttendanceList()
         {
             List<Attendance> attendanceList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,17 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortByDescending(a => a.AttendanceDate)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                attendanceList = new List<Attendance>
-                {
-                    new Attendance { AttendanceID = 1, StudentID = 1, StudentName = "Maulik Ghara", AttendanceDate = DateTime.Today, Status = "Present", Subject = "Web Development with .NET", Remarks = "", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Attendance { AttendanceID = 2, StudentID = 2, StudentName = "Aarav Sharma", AttendanceDate = DateTime.Today, Status = "Absent", Subject = "Database Management Systems", Remarks = "Medical Leave", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(attendanceList);
         }
 
@@ -60,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(attendance);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching attendance: " + ex.Message;
+            }
 
             return RedirectToAction("AttendanceList");
         }
@@ -169,13 +165,8 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Students = new List<Student>
-                {
-                    new Student { StudentID = 1, StudentName = "Maulik Ghara" },
-                    new Student { StudentID = 2, StudentName = "Aarav Sharma" },
-                    new Student { StudentID = 3, StudentName = "Priya Patel" }
-                };
-                ViewBag.Courses = new List<string> { "Web Development with .NET", "Database Management Systems", "Object Oriented Programming" };
+                ViewBag.Students = new List<Student>();
+                ViewBag.Courses = new List<string>();
             }
         }
     }

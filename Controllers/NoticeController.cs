@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult NoticeList()
         {
             List<Notice> noticeList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,18 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortByDescending(n => n.PublishedDate)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                noticeList = new List<Notice>
-                {
-                    new Notice { NoticeID = 1, Title = "Mid-Term Examination Schedule Released", Content = "The mid-term examination timetable for Semester 5 has been published. Check your respective department notices.", Category = "Exam", PublishedDate = DateTime.Today, IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
-                    new Notice { NoticeID = 2, Title = "Annual Tech Fest - Inovacia 2026", Content = "Registration is now open for hackathons, robotics, and coding competitions.", Category = "General", PublishedDate = DateTime.Today.AddDays(-2), IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
-                    new Notice { NoticeID = 3, Title = "Independence Day Holiday", Content = "The university will remain closed on the occasion of Independence Day.", Category = "Holiday", PublishedDate = DateTime.Today.AddDays(-10), IsActive = false, Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(noticeList);
         }
 
@@ -59,7 +51,10 @@ namespace StudentManagementSystem.Controllers
                     return View(notice);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching notice: " + ex.Message;
+            }
 
             return RedirectToAction("NoticeList");
         }

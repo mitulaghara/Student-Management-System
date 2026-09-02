@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult StaffList()
         {
             List<Staff> staffList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,17 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(s => s.StaffName)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                staffList = new List<Staff>
-                {
-                    new Staff { StaffID = 1, StaffName = "Dr. Ramesh Patel", DepartmentName = "Computer Science", MobileNo = "9876543210", EmailAddress = "ramesh.patel@school.edu", Remarks = "Senior Professor", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Staff { StaffID = 2, StaffName = "Prof. Sneha Shah", DepartmentName = "Information Technology", MobileNo = "9823456789", EmailAddress = "sneha.shah@school.edu", Remarks = "Associate Professor", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(staffList);
         }
 
@@ -60,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(staff);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching staff: " + ex.Message;
+            }
 
             return RedirectToAction("StaffList");
         }
@@ -113,8 +109,12 @@ namespace StudentManagementSystem.Controllers
             try
             {
                 _mongoDbService.Staffs.DeleteOne(s => s.StaffID == id);
+                TempData["SuccessMessage"] = "Staff member deleted successfully!";
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error deleting staff: " + ex.Message;
+            }
 
             return RedirectToAction("StaffList");
         }
@@ -130,7 +130,7 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                return new List<string?> { "Computer Science", "Information Technology", "Mechanical Engineering", "Civil Engineering" };
+                return new List<string?>();
             }
         }
     }

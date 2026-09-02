@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult Index()
         {
             List<Department> departmentList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,18 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(d => d.DepartmentName)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                departmentList = new List<Department>
-                {
-                    new Department { DepartmentID = 1, DepartmentName = "Computer Science", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Department { DepartmentID = 2, DepartmentName = "Information Technology", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Department { DepartmentID = 3, DepartmentName = "Mechanical Engineering", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View("DepartmentList", departmentList);
         }
 
@@ -59,7 +51,10 @@ namespace StudentManagementSystem.Controllers
                     return View(department);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching department: " + ex.Message;
+            }
 
             return RedirectToAction("Index");
         }
@@ -111,8 +106,12 @@ namespace StudentManagementSystem.Controllers
             try
             {
                 _mongoDbService.Departments.DeleteOne(d => d.DepartmentID == id);
+                TempData["SuccessMessage"] = "Department deleted successfully!";
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error deleting department: " + ex.Message;
+            }
 
             return RedirectToAction("Index");
         }

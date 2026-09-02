@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult CourseList()
         {
             List<Course> courseList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,17 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(c => c.CourseName)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                courseList = new List<Course>
-                {
-                    new Course { CourseID = 1, CourseName = "Web Development with .NET", Remarks = "Full Stack C# MVC", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Course { CourseID = 2, CourseName = "Database Management Systems", Remarks = "MongoDB & Relational Design", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(courseList);
         }
 
@@ -58,7 +51,10 @@ namespace StudentManagementSystem.Controllers
                     return View(course);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching course: " + ex.Message;
+            }
 
             return RedirectToAction("CourseList");
         }
@@ -110,8 +106,12 @@ namespace StudentManagementSystem.Controllers
             try
             {
                 _mongoDbService.Courses.DeleteOne(c => c.CourseID == id);
+                TempData["SuccessMessage"] = "Course deleted successfully!";
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error deleting course: " + ex.Message;
+            }
 
             return RedirectToAction("CourseList");
         }

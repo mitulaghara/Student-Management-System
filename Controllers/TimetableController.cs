@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult TimetableList()
         {
             List<Timetable> timetableList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,18 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(t => t.DayOfWeek)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                timetableList = new List<Timetable>
-                {
-                    new Timetable { TimetableID = 1, DepartmentName = "Computer Science", CourseName = "Web Development with .NET", ClassroomName = "Lab 1 - Ground Floor", StaffName = "Dr. Ramesh Patel", DayOfWeek = "Monday", StartTime = "09:00 AM", EndTime = "10:30 AM", Subject = "ASP.NET MVC Core", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Timetable { TimetableID = 2, DepartmentName = "Information Technology", CourseName = "Database Management Systems", ClassroomName = "Lab 2 - First Floor", StaffName = "Prof. Sneha Shah", DayOfWeek = "Tuesday", StartTime = "11:00 AM", EndTime = "12:30 PM", Subject = "MongoDB & NoSQL", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Timetable { TimetableID = 3, DepartmentName = "Mechanical Engineering", CourseName = "Object Oriented Programming", ClassroomName = "Classroom 101", StaffName = "Dr. Anil Mehta", DayOfWeek = "Wednesday", StartTime = "02:00 PM", EndTime = "03:30 PM", Subject = "OOP Principles", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(timetableList);
         }
 
@@ -61,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(timetable);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching timetable: " + ex.Message;
+            }
 
             return RedirectToAction("TimetableList");
         }
@@ -151,10 +146,10 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Departments = new List<string> { "Computer Science", "Information Technology", "Mechanical Engineering" };
-                ViewBag.Courses = new List<string> { "Web Development with .NET", "Database Management Systems" };
-                ViewBag.Classrooms = new List<string> { "Lab 1 - Ground Floor", "Lab 2 - First Floor" };
-                ViewBag.Staffs = new List<string> { "Dr. Ramesh Patel", "Prof. Sneha Shah" };
+                ViewBag.Departments = new List<string>();
+                ViewBag.Courses = new List<string>();
+                ViewBag.Classrooms = new List<string>();
+                ViewBag.Staffs = new List<string>();
             }
         }
     }

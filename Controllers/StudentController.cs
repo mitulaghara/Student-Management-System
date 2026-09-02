@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult StudentList()
         {
             List<Student> studentList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,16 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(s => s.StudentName)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                studentList = new List<Student>
-                {
-                    new Student { StudentID = 1, StudentName = "Maulik Ghara", RollNo = "CS2026-001", EmailAddress = "maulik.ghara@student.edu", MobileNo = "9988776655", BirthDate = new DateTime(2004, 5, 15), DepartmentName = "Computer Science", CourseName = "Web Development with .NET", ClassroomName = "Lab 1 - Ground Floor", IsActive = true, Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(studentList);
         }
 
@@ -59,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(student);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching student: " + ex.Message;
+            }
 
             return RedirectToAction("StudentList");
         }
@@ -68,7 +65,6 @@ namespace StudentManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Save(Student model)
         {
-            // Remove auto-generated fields from ModelState so they don't block validation
             ModelState.Remove("StudentID");
             ModelState.Remove("Created");
             ModelState.Remove("Modified");
@@ -95,7 +91,6 @@ namespace StudentManagementSystem.Controllers
             {
                 if (model.StudentID == 0)
                 {
-                    // Auto-generate ID
                     var last = _mongoDbService.Students
                         .Find(FilterDefinition<Student>.Empty)
                         .SortByDescending(s => s.StudentID)
@@ -141,7 +136,7 @@ namespace StudentManagementSystem.Controllers
 
         public IActionResult ExportToCsv()
         {
-            List<Student> students;
+            List<Student> students = new();
             try
             {
                 students = _mongoDbService.Students.Find(FilterDefinition<Student>.Empty).ToList();
@@ -185,9 +180,9 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Departments = new List<string> { "Computer Science", "Information Technology", "Mechanical Engineering" };
-                ViewBag.Courses = new List<string> { "Web Development with .NET", "Database Management Systems" };
-                ViewBag.Classrooms = new List<string> { "Lab 1 - Ground Floor", "Lab 2 - First Floor" };
+                ViewBag.Departments = new List<string>();
+                ViewBag.Courses = new List<string>();
+                ViewBag.Classrooms = new List<string>();
             }
         }
     }

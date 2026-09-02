@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult ClassroomList()
         {
             List<Classroom> classroomList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,17 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(c => c.ClassroomName)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                classroomList = new List<Classroom>
-                {
-                    new Classroom { ClassroomID = 1, ClassroomName = "Lab 1 - Ground Floor", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Classroom { ClassroomID = 2, ClassroomName = "Lab 2 - First Floor", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(classroomList);
         }
 
@@ -58,7 +51,10 @@ namespace StudentManagementSystem.Controllers
                     return View(classroom);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching classroom: " + ex.Message;
+            }
 
             return RedirectToAction("ClassroomList");
         }
@@ -110,8 +106,12 @@ namespace StudentManagementSystem.Controllers
             try
             {
                 _mongoDbService.Classrooms.DeleteOne(c => c.ClassroomID == id);
+                TempData["SuccessMessage"] = "Classroom deleted successfully!";
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error deleting classroom: " + ex.Message;
+            }
 
             return RedirectToAction("ClassroomList");
         }

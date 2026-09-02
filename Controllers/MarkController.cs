@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult MarkList()
         {
             List<Mark> markList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,18 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortByDescending(m => m.MarkID)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                markList = new List<Mark>
-                {
-                    new Mark { MarkID = 1, StudentID = 1, StudentName = "Maulik Ghara", CourseName = "Web Development with .NET", ExamType = "Mid-Term", MarksObtained = 88, TotalMarks = 100, Grade = "A+", Remarks = "Excellent performance", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Mark { MarkID = 2, StudentID = 2, StudentName = "Aarav Sharma", CourseName = "Database Management Systems", ExamType = "Practical", MarksObtained = 76, TotalMarks = 100, Grade = "B+", Remarks = "Good practical skills", Created = DateTime.Now, Modified = DateTime.Now },
-                    new Mark { MarkID = 3, StudentID = 3, StudentName = "Priya Patel", CourseName = "Object Oriented Programming", ExamType = "Final", MarksObtained = 92, TotalMarks = 100, Grade = "A+", Remarks = "Outstanding results", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(markList);
         }
 
@@ -61,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(mark);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching mark: " + ex.Message;
+            }
 
             return RedirectToAction("MarkList");
         }
@@ -164,13 +159,8 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Students = new List<Student>
-                {
-                    new Student { StudentID = 1, StudentName = "Maulik Ghara" },
-                    new Student { StudentID = 2, StudentName = "Aarav Sharma" },
-                    new Student { StudentID = 3, StudentName = "Priya Patel" }
-                };
-                ViewBag.Courses = new List<string> { "Web Development with .NET", "Database Management Systems", "Object Oriented Programming" };
+                ViewBag.Students = new List<Student>();
+                ViewBag.Courses = new List<string>();
             }
         }
     }

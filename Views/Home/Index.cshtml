@@ -231,31 +231,41 @@
     google.charts.setOnLoadCallback(drawCharts);
 
     function drawCharts() {
-        // Department Distribution Chart
-        var deptData = google.visualization.arrayToDataTable([
-            ['Department', 'Students Enrolled'],
-            ['Computer Science', @ViewBag.StudentCount > 0 ? @ViewBag.StudentCount : 3],
-            ['Information Technology', 2],
-            ['Mechanical Engineering', 1],
-            ['Civil Engineering', 0]
-        ]);
+        // Department Distribution Chart (Live Database Data)
+        var deptRows = [
+            ['Department', 'Students Enrolled']
+        ];
+
+        @if (ViewBag.DeptChartData != null)
+        {
+            foreach (var item in (List<StudentManagementSystem.Controllers.DepartmentChartItem>)ViewBag.DeptChartData)
+            {
+                <text>deptRows.push(['@item.DepartmentName', @item.StudentCount]);</text>
+            }
+        }
+
+        if (deptRows.length === 1) {
+            deptRows.push(['No Data', 0]);
+        }
+
+        var deptData = google.visualization.arrayToDataTable(deptRows);
 
         var deptOptions = {
             chartArea: {width: '85%', height: '75%'},
             legend: {position: 'bottom'},
-            colors: ['#4154f1', '#2eca6a', '#ff771d', '#17a2b8'],
+            colors: ['#4154f1', '#2eca6a', '#ff771d', '#17a2b8', '#6f42c1'],
             hAxis: {minValue: 0}
         };
 
         var deptChart = new google.visualization.ColumnChart(document.getElementById('departmentChart'));
         deptChart.draw(deptData, deptOptions);
 
-        // Attendance Breakdown Donut Chart
+        // Attendance Breakdown Donut Chart (Live Database Data)
         var attData = google.visualization.arrayToDataTable([
             ['Status', 'Count'],
-            ['Present', @(ViewBag.PresentCount > 0 ? ViewBag.PresentCount : 1)],
-            ['Absent', @(ViewBag.AbsentCount > 0 ? ViewBag.AbsentCount : 1)],
-            ['Late', @(ViewBag.LateCount > 0 ? ViewBag.LateCount : 1)]
+            ['Present', @(ViewBag.PresentCount ?? 0)],
+            ['Absent', @(ViewBag.AbsentCount ?? 0)],
+            ['Late', @(ViewBag.LateCount ?? 0)]
         ]);
 
         var attOptions = {

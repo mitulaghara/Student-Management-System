@@ -24,14 +24,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-@if (ViewBag.IsMock == true)
-{
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-triangle-fill me-1"></i>
-        <strong>Running on Mock Data!</strong> Could not connect to MongoDB. Check your connection string in appsettings.json.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
+
 
 <div class="m-2">
     <div class="bg-primary-subtle rounded row pt-2 pb-2 align-items-center">

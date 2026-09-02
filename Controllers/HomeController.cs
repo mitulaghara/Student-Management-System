@@ -18,23 +18,24 @@ namespace StudentManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            long studentCount = 3;
-            long staffCount = 3;
-            long departmentCount = 4;
-            long courseCount = 3;
-            long classroomCount = 4;
-            long enrollmentCount = 2;
-            long attendanceCount = 3;
-            long markCount = 3;
-            long noticeCount = 3;
-            long timetableCount = 3;
+            long studentCount = 0;
+            long staffCount = 0;
+            long departmentCount = 0;
+            long courseCount = 0;
+            long classroomCount = 0;
+            long enrollmentCount = 0;
+            long attendanceCount = 0;
+            long markCount = 0;
+            long noticeCount = 0;
+            long timetableCount = 0;
 
-            long presentCount = 1;
-            long absentCount = 1;
-            long lateCount = 1;
+            long presentCount = 0;
+            long absentCount = 0;
+            long lateCount = 0;
 
             List<Student> recentStudents = new();
             List<Notice> recentNotices = new();
+            List<DepartmentChartItem> deptChartData = new();
 
             try
             {
@@ -64,21 +65,21 @@ namespace StudentManagementSystem.Controllers
                     .SortByDescending(n => n.PublishedDate)
                     .Limit(4)
                     .ToList();
-            }
-            catch (Exception)
-            {
-                recentStudents = new List<Student>
-                {
-                    new Student { StudentID = 1, StudentName = "Maulik Ghara", RollNo = "CS2026-001", DepartmentName = "Computer Science", CourseName = "Web Development with .NET", IsActive = true },
-                    new Student { StudentID = 2, StudentName = "Aarav Sharma", RollNo = "IT2026-042", DepartmentName = "Information Technology", CourseName = "Database Management Systems", IsActive = true },
-                    new Student { StudentID = 3, StudentName = "Priya Patel", RollNo = "ME2026-015", DepartmentName = "Mechanical Engineering", CourseName = "Object Oriented Programming", IsActive = true }
-                };
 
-                recentNotices = new List<Notice>
+                var depts = _mongoDbService.Departments.Find(FilterDefinition<Department>.Empty).ToList();
+                foreach (var dept in depts)
                 {
-                    new Notice { NoticeID = 1, Title = "Mid-Term Examination Schedule Released", Category = "Exam", PublishedDate = DateTime.Today, IsActive = true },
-                    new Notice { NoticeID = 2, Title = "Annual Tech Fest - Inovacia 2026", Category = "General", PublishedDate = DateTime.Today.AddDays(-2), IsActive = true }
-                };
+                    long count = _mongoDbService.Students.CountDocuments(s => s.DepartmentName == dept.DepartmentName);
+                    deptChartData.Add(new DepartmentChartItem
+                    {
+                        DepartmentName = dept.DepartmentName ?? "",
+                        StudentCount = count
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Database connection notice: " + ex.Message;
             }
 
             ViewBag.StudentCount = studentCount;
@@ -98,8 +99,15 @@ namespace StudentManagementSystem.Controllers
 
             ViewBag.RecentStudents = recentStudents;
             ViewBag.RecentNotices = recentNotices;
+            ViewBag.DeptChartData = deptChartData;
 
             return View();
         }
+    }
+
+    public class DepartmentChartItem
+    {
+        public string DepartmentName { get; set; } = string.Empty;
+        public long StudentCount { get; set; }
     }
 }

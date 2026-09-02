@@ -19,7 +19,6 @@ namespace StudentManagementSystem.Controllers
         public IActionResult EnrollmentList()
         {
             List<Enrollment> enrollmentList = new();
-            bool isMock = false;
 
             try
             {
@@ -28,16 +27,11 @@ namespace StudentManagementSystem.Controllers
                     .SortBy(e => e.EnrollmentID)
                     .ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                enrollmentList = new List<Enrollment>
-                {
-                    new Enrollment { EnrollmentID = 1, StudentID = 1, StudentName = "Maulik Ghara", StaffID = 1, StaffName = "Dr. Ramesh Patel", IsActive = true, Remarks = "Assigned to Senior Advisor", Created = DateTime.Now, Modified = DateTime.Now }
-                };
-                isMock = true;
+                TempData["ErrorMessage"] = "Error connecting to Database: " + ex.Message;
             }
 
-            ViewBag.IsMock = isMock;
             return View(enrollmentList);
         }
 
@@ -59,7 +53,10 @@ namespace StudentManagementSystem.Controllers
                     return View(enrollment);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error fetching enrollment: " + ex.Message;
+            }
 
             return RedirectToAction("EnrollmentList");
         }
@@ -124,8 +121,12 @@ namespace StudentManagementSystem.Controllers
             try
             {
                 _mongoDbService.Enrollments.DeleteOne(e => e.EnrollmentID == id);
+                TempData["SuccessMessage"] = "Enrollment deleted successfully!";
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error deleting enrollment: " + ex.Message;
+            }
 
             return RedirectToAction("EnrollmentList");
         }
@@ -139,8 +140,8 @@ namespace StudentManagementSystem.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Students = new List<Student> { new Student { StudentID = 1, StudentName = "Maulik Ghara" } };
-                ViewBag.Staffs = new List<Staff> { new Staff { StaffID = 1, StaffName = "Dr. Ramesh Patel" } };
+                ViewBag.Students = new List<Student>();
+                ViewBag.Staffs = new List<Staff>();
             }
         }
     }
