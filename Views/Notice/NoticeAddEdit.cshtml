@@ -1,0 +1,80 @@
+@model StudentManagementSystem.Models.Notice
+
+<div class="pagetitle">
+    <h1>Publish / Edit Notice</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Notice" asp-action="NoticeList"><i class="fa-solid fa-bullhorn"></i> Notices</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> @(Model.NoticeID == 0 ? "Publish Notice" : "Edit Notice")</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Notice" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="NoticeID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.NoticeID == 0 ? "Publish Campus Notice" : "Edit Notice Details")</span>
+            </div>
+
+            <!-- Title -->
+            <div class="col-md-8">
+                <label asp-for="Title" class="form-label fw-bold">Notice Title</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-fonts text-primary"></i></span>
+                    <input type="text" class="form-control" asp-for="Title" placeholder="e.g. Mid-Term Examination Schedule" />
+                </div>
+                <span asp-validation-for="Title" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-4">
+                <label asp-for="Category" class="form-label fw-bold">Category</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-tag text-primary"></i></span>
+                    <select class="form-select" asp-for="Category">
+                        <option value="Academic">📚 Academic</option>
+                        <option value="Exam">📝 Examination</option>
+                        <option value="Holiday">🌴 Holiday</option>
+                        <option value="Sports">⚽ Sports / Events</option>
+                        <option value="General">📢 General Announcement</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Category" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Published Date -->
+            <div class="col-md-6">
+                <label asp-for="PublishedDate" class="form-label fw-bold">Publish Date</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar-event text-primary"></i></span>
+                    <input type="date" class="form-control" asp-for="PublishedDate" />
+                </div>
+                <span asp-validation-for="PublishedDate" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Active Status -->
+            <div class="col-md-6 d-flex align-items-center mt-4">
+                <div class="form-check form-switch fs-5">
+                    <input class="form-check-input" type="checkbox" role="switch" id="noticeActiveSwitch" asp-for="IsActive">
+                    <label class="form-check-label fs-6 fw-bold" for="noticeActiveSwitch">Publish on Notice Board (Active)?</label>
+                </div>
+            </div>
+
+            <!-- Notice Content -->
+            <div class="col-12">
+                <label asp-for="Content" class="form-label fw-bold">Notice Content / Description</label>
+                <textarea class="form-control" rows="5" placeholder="Write full details of the notice or announcement here..." asp-for="Content"></textarea>
+                <span asp-validation-for="Content" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save & Publish</button>
+                <a asp-controller="Notice" asp-action="NoticeList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

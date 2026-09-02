@@ -24,6 +24,7 @@ namespace StudentManagementSystem.Services
         public IMongoCollection<UserLoginModel> Users => _database.GetCollection<UserLoginModel>("Users");
         public IMongoCollection<Attendance> Attendances => _database.GetCollection<Attendance>("Attendances");
         public IMongoCollection<Mark> Marks => _database.GetCollection<Mark>("Marks");
+        public IMongoCollection<Notice> Notices => _database.GetCollection<Notice>("Notices");
 
         public void SeedInitialData()
         {
@@ -121,6 +122,17 @@ namespace StudentManagementSystem.Services
                         new Mark { MarkID = 1, StudentID = 1, StudentName = "Maulik Ghara", CourseName = "Web Development with .NET", ExamType = "Mid-Term", MarksObtained = 88, TotalMarks = 100, Grade = "A+", Remarks = "Excellent performance", Created = DateTime.Now, Modified = DateTime.Now },
                         new Mark { MarkID = 2, StudentID = 2, StudentName = "Aarav Sharma", CourseName = "Database Management Systems", ExamType = "Practical", MarksObtained = 76, TotalMarks = 100, Grade = "B+", Remarks = "Good practical skills", Created = DateTime.Now, Modified = DateTime.Now },
                         new Mark { MarkID = 3, StudentID = 3, StudentName = "Priya Patel", CourseName = "Object Oriented Programming", ExamType = "Final", MarksObtained = 92, TotalMarks = 100, Grade = "A+", Remarks = "Outstanding results", Created = DateTime.Now, Modified = DateTime.Now }
+                    });
+                }
+
+                // Seed Notices
+                if (Notices.CountDocuments(FilterDefinition<Notice>.Empty) == 0)
+                {
+                    Notices.InsertMany(new[]
+                    {
+                        new Notice { NoticeID = 1, Title = "Mid-Term Examination Schedule Released", Content = "The mid-term examination timetable for Semester 5 has been published. Check your respective department notices.", Category = "Exam", PublishedDate = DateTime.Today, IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
+                        new Notice { NoticeID = 2, Title = "Annual Tech Fest - Inovacia 2026", Content = "Registration is now open for hackathons, robotics, and coding competitions. Students can register through the portal.", Category = "General", PublishedDate = DateTime.Today.AddDays(-2), IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
+                        new Notice { NoticeID = 3, Title = "Independence Day Holiday", Content = "The university will remain closed on the occasion of Independence Day.", Category = "Holiday", PublishedDate = DateTime.Today.AddDays(-10), IsActive = false, Created = DateTime.Now, Modified = DateTime.Now }
                     });
                 }
             }
