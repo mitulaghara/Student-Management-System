@@ -1,5 +1,9 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
 <div class="pagetitle">
-    <h1>Dashboard</h1>
+    <h1>Dashboard Overview</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
@@ -8,159 +12,260 @@
 </div><!-- End Page Title -->
 
 <section class="section dashboard">
+    <!-- Quick Statistics KPI Cards -->
     <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-            <div class="row">
-
-                <!-- Students Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card sales-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Students <span>| Total</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-primary-subtle text-primary">
-                                    <i class="fa-solid fa-user-graduate fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.StudentCount</h6>
-                                    <span class="text-success small pt-1 fw-bold">Active</span>
-                                </div>
-                            </div>
+        <!-- Students Card -->
+        <div class="col-xxl-3 col-md-6 mb-3">
+            <div class="card info-card sales-card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Students <span>| Total</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-primary-subtle text-primary">
+                            <i class="fa-solid fa-user-graduate fs-4"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6 class="fs-4 mb-0 fw-bold">@ViewBag.StudentCount</h6>
+                            <a asp-controller="Student" asp-action="StudentList" class="text-primary small pt-1 fw-semibold text-decoration-none">View All <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
-                </div><!-- End Students Card -->
-
-                <!-- Staff Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card revenue-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Staff / Faculty <span>| Total</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-success-subtle text-success">
-                                    <i class="fa-solid fa-user-tie fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.StaffCount</h6>
-                                    <span class="text-success small pt-1 fw-bold">Active</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Staff Card -->
-
-                <!-- Course Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card customers-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Courses <span>| Offered</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-warning-subtle text-warning">
-                                    <i class="fa-solid fa-graduation-cap fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.CourseCount</h6>
-                                    <span class="text-muted small pt-2 ps-1">Programs</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Course Card -->
-
-                <!-- Department Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card sales-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Departments <span>| Total</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-info-subtle text-info">
-                                    <i class="fa-solid fa-building fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.DepartmentCount</h6>
-                                    <span class="text-muted small pt-2 ps-1">Branches</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Department Card -->
-
-                <!-- Classroom Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card revenue-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Classrooms <span>| Available</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-secondary-subtle text-secondary">
-                                    <i class="fa-solid fa-school fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.ClassroomCount</h6>
-                                    <span class="text-success small pt-1 fw-bold">Live</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Classroom Card -->
-
-                <!-- Advising Card -->
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card customers-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Enrollments <span>| Active</span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-danger-subtle text-danger">
-                                    <i class="fa-solid fa-users fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>@ViewBag.EnrollmentCount</h6>
-                                    <span class="text-success small pt-1 fw-bold">Mentorships</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Advising Card -->
-
-            </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-            <!-- Google Chart Card -->
-            <div class="card">
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Enrollment Statistics <span>| Department-wise</span></h5>
-                    <div id="enrollmentChart" style="min-height: 290px;" class="echart"></div>
                 </div>
-            </div><!-- End Google Chart Card -->
-        </div><!-- End Right side columns -->
+            </div>
+        </div>
 
+        <!-- Faculty / Staff Card -->
+        <div class="col-xxl-3 col-md-6 mb-3">
+            <div class="card info-card revenue-card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Staff / Faculty <span>| Total</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-success-subtle text-success">
+                            <i class="fa-solid fa-user-tie fs-4"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6 class="fs-4 mb-0 fw-bold">@ViewBag.StaffCount</h6>
+                            <a asp-controller="Staff" asp-action="StaffList" class="text-success small pt-1 fw-semibold text-decoration-none">View Staff <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Card -->
+        <div class="col-xxl-3 col-md-6 mb-3">
+            <div class="card info-card customers-card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Courses <span>| Active</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-warning-subtle text-warning">
+                            <i class="fa-solid fa-graduation-cap fs-4"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6 class="fs-4 mb-0 fw-bold">@ViewBag.CourseCount</h6>
+                            <a asp-controller="Course" asp-action="CourseList" class="text-warning small pt-1 fw-semibold text-decoration-none">Programs <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Card -->
+        <div class="col-xxl-3 col-md-6 mb-3">
+            <div class="card info-card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Attendance <span>| Logs</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-info-subtle text-info">
+                            <i class="fa-solid fa-clipboard-check fs-4"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6 class="fs-4 mb-0 fw-bold">@ViewBag.AttendanceCount</h6>
+                            <a asp-controller="Attendance" asp-action="AttendanceList" class="text-info small pt-1 fw-semibold text-decoration-none">Records <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Row: Secondary Stats -->
+    <div class="row">
+        <div class="col-lg-3 col-6 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-primary d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted small">Departments</div>
+                    <div class="fs-5 fw-bold">@ViewBag.DepartmentCount</div>
+                </div>
+                <i class="fa-solid fa-building text-primary fs-3 opacity-50"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-success d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted small">Classrooms</div>
+                    <div class="fs-5 fw-bold">@ViewBag.ClassroomCount</div>
+                </div>
+                <i class="fa-solid fa-school text-success fs-3 opacity-50"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-warning d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted small">Marks Logged</div>
+                    <div class="fs-5 fw-bold">@ViewBag.MarkCount</div>
+                </div>
+                <i class="fa-solid fa-award text-warning fs-3 opacity-50"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-danger d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted small">Notices</div>
+                    <div class="fs-5 fw-bold">@ViewBag.NoticeCount</div>
+                </div>
+                <i class="fa-solid fa-bullhorn text-danger fs-3 opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts and Tables -->
+    <div class="row">
+        <!-- Left Side: Interactive Charts -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Enrollment & Student Distribution <span>| Analytics</span></h5>
+                    <div id="departmentChart" style="min-height: 320px;"></div>
+                </div>
+            </div>
+
+            <!-- Recent Students Table -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Recently Enrolled Students</h5>
+                        <a asp-controller="Student" asp-action="StudentAddEdit" class="btn btn-sm btn-outline-primary"><i class="bi bi-person-plus-fill me-1"></i> Register</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Course</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.RecentStudents != null)
+                                {
+                                    @foreach (var std in (List<StudentManagementSystem.Models.Student>)ViewBag.RecentStudents)
+                                    {
+                                        <tr>
+                                            <td><span class="badge bg-light text-dark border">@std.RollNo</span></td>
+                                            <td><strong>@std.StudentName</strong></td>
+                                            <td>@std.DepartmentName</td>
+                                            <td><small class="text-muted">@std.CourseName</small></td>
+                                            <td>
+                                                @if (std.IsActive)
+                                                {
+                                                    <span class="badge bg-success">Active</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">Inactive</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Attendance Breakdown & Campus Notices -->
+        <div class="col-lg-4">
+            <!-- Attendance Donut Chart -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Attendance Ratio <span>| Overview</span></h5>
+                    <div id="attendanceChart" style="min-height: 260px;"></div>
+                </div>
+            </div>
+
+            <!-- Notice Board Widget -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Campus Notices</h5>
+                        <a asp-controller="Notice" asp-action="NoticeList" class="btn btn-sm btn-link p-0 text-decoration-none">View All</a>
+                    </div>
+                    <div class="activity">
+                        @if (ViewBag.RecentNotices != null)
+                        {
+                            @foreach (var notice in (List<StudentManagementSystem.Models.Notice>)ViewBag.RecentNotices)
+                            {
+                                <div class="activity-item d-flex pb-3 border-bottom mb-2">
+                                    <div class="activite-label text-muted small me-2" style="min-width: 65px;">@notice.PublishedDate.ToString("dd MMM")</div>
+                                    <div class="activity-content">
+                                        <span class="fw-bold text-dark d-block">@notice.Title</span>
+                                        <span class="badge bg-primary-subtle text-primary mt-1">@notice.Category</span>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Google Charts JS Loading -->
+<!-- Google Charts Loader -->
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     google.charts.load('current', {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawCharts);
 
-    function drawChart() {
-        const data = google.visualization.arrayToDataTable([
-            ['Department', 'Students'],
+    function drawCharts() {
+        // Department Distribution Chart
+        var deptData = google.visualization.arrayToDataTable([
+            ['Department', 'Students Enrolled'],
             ['Computer Science', @ViewBag.StudentCount > 0 ? @ViewBag.StudentCount : 3],
             ['Information Technology', 2],
             ['Mechanical Engineering', 1],
             ['Civil Engineering', 0]
         ]);
 
-        const options = {
-            title: 'Students enrolled per Department',
-            pieHole: 0.4,
-            colors: ['#4154f1', '#2eca6a', '#ff771d', '#17a2b8']
+        var deptOptions = {
+            chartArea: {width: '85%', height: '75%'},
+            legend: {position: 'bottom'},
+            colors: ['#4154f1', '#2eca6a', '#ff771d', '#17a2b8'],
+            hAxis: {minValue: 0}
         };
 
-        const chart = new google.visualization.PieChart(document.getElementById('enrollmentChart'));
-        chart.draw(data, options);
+        var deptChart = new google.visualization.ColumnChart(document.getElementById('departmentChart'));
+        deptChart.draw(deptData, deptOptions);
+
+        // Attendance Breakdown Donut Chart
+        var attData = google.visualization.arrayToDataTable([
+            ['Status', 'Count'],
+            ['Present', @(ViewBag.PresentCount > 0 ? ViewBag.PresentCount : 1)],
+            ['Absent', @(ViewBag.AbsentCount > 0 ? ViewBag.AbsentCount : 1)],
+            ['Late', @(ViewBag.LateCount > 0 ? ViewBag.LateCount : 1)]
+        ]);
+
+        var attOptions = {
+            pieHole: 0.5,
+            chartArea: {width: '90%', height: '80%'},
+            colors: ['#2eca6a', '#dc3545', '#ffc107'],
+            legend: {position: 'bottom'}
+        };
+
+        var attChart = new google.visualization.PieChart(document.getElementById('attendanceChart'));
+        attChart.draw(attData, attOptions);
     }
 </script>
