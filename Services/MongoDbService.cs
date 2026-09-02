@@ -25,6 +25,7 @@ namespace StudentManagementSystem.Services
         public IMongoCollection<Attendance> Attendances => _database.GetCollection<Attendance>("Attendances");
         public IMongoCollection<Mark> Marks => _database.GetCollection<Mark>("Marks");
         public IMongoCollection<Notice> Notices => _database.GetCollection<Notice>("Notices");
+        public IMongoCollection<Timetable> Timetables => _database.GetCollection<Timetable>("Timetables");
 
         public void SeedInitialData()
         {
@@ -133,6 +134,17 @@ namespace StudentManagementSystem.Services
                         new Notice { NoticeID = 1, Title = "Mid-Term Examination Schedule Released", Content = "The mid-term examination timetable for Semester 5 has been published. Check your respective department notices.", Category = "Exam", PublishedDate = DateTime.Today, IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
                         new Notice { NoticeID = 2, Title = "Annual Tech Fest - Inovacia 2026", Content = "Registration is now open for hackathons, robotics, and coding competitions. Students can register through the portal.", Category = "General", PublishedDate = DateTime.Today.AddDays(-2), IsActive = true, Created = DateTime.Now, Modified = DateTime.Now },
                         new Notice { NoticeID = 3, Title = "Independence Day Holiday", Content = "The university will remain closed on the occasion of Independence Day.", Category = "Holiday", PublishedDate = DateTime.Today.AddDays(-10), IsActive = false, Created = DateTime.Now, Modified = DateTime.Now }
+                    });
+                }
+
+                // Seed Timetables
+                if (Timetables.CountDocuments(FilterDefinition<Timetable>.Empty) == 0)
+                {
+                    Timetables.InsertMany(new[]
+                    {
+                        new Timetable { TimetableID = 1, DepartmentName = "Computer Science", CourseName = "Web Development with .NET", ClassroomName = "Lab 1 - Ground Floor", StaffName = "Dr. Ramesh Patel", DayOfWeek = "Monday", StartTime = "09:00 AM", EndTime = "10:30 AM", Subject = "ASP.NET MVC Core", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Timetable { TimetableID = 2, DepartmentName = "Information Technology", CourseName = "Database Management Systems", ClassroomName = "Lab 2 - First Floor", StaffName = "Prof. Sneha Shah", DayOfWeek = "Tuesday", StartTime = "11:00 AM", EndTime = "12:30 PM", Subject = "MongoDB & NoSQL", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Timetable { TimetableID = 3, DepartmentName = "Mechanical Engineering", CourseName = "Object Oriented Programming", ClassroomName = "Classroom 101", StaffName = "Dr. Anil Mehta", DayOfWeek = "Wednesday", StartTime = "02:00 PM", EndTime = "03:30 PM", Subject = "OOP Principles", Created = DateTime.Now, Modified = DateTime.Now }
                     });
                 }
             }

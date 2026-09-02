@@ -1,0 +1,140 @@
+@model StudentManagementSystem.Models.Timetable
+
+<div class="pagetitle">
+    <h1>Add / Edit Class Schedule</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Timetable" asp-action="TimetableList"><i class="fa-solid fa-calendar-days"></i> Timetable</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> @(Model.TimetableID == 0 ? "Add Schedule" : "Edit Schedule")</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Timetable" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="TimetableID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.TimetableID == 0 ? "Add Class Schedule" : "Edit Schedule")</span>
+            </div>
+
+            <!-- Subject -->
+            <div class="col-md-6">
+                <label asp-for="Subject" class="form-label fw-bold">Subject / Lecture Title</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-journal-text text-primary"></i></span>
+                    <input type="text" class="form-control" asp-for="Subject" placeholder="e.g. ASP.NET MVC Core" />
+                </div>
+                <span asp-validation-for="Subject" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Day of Week -->
+            <div class="col-md-6">
+                <label asp-for="DayOfWeek" class="form-label fw-bold">Day of Week</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar3 text-primary"></i></span>
+                    <select class="form-select" asp-for="DayOfWeek">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+                </div>
+                <span asp-validation-for="DayOfWeek" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Start Time -->
+            <div class="col-md-3">
+                <label asp-for="StartTime" class="form-label fw-bold">Start Time</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-clock text-primary"></i></span>
+                    <input type="text" class="form-control" asp-for="StartTime" placeholder="e.g. 09:00 AM" />
+                </div>
+                <span asp-validation-for="StartTime" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- End Time -->
+            <div class="col-md-3">
+                <label asp-for="EndTime" class="form-label fw-bold">End Time</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-clock-fill text-primary"></i></span>
+                    <input type="text" class="form-control" asp-for="EndTime" placeholder="e.g. 10:30 AM" />
+                </div>
+                <span asp-validation-for="EndTime" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6">
+                <label asp-for="DepartmentName" class="form-label fw-bold">Department</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-building text-primary"></i></span>
+                    <select class="form-select" asp-for="DepartmentName">
+                        <option value="">-- Select Department --</option>
+                        @foreach (var dept in (List<string>)ViewBag.Departments)
+                        {
+                            <option value="@dept">@dept</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="DepartmentName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Course -->
+            <div class="col-md-4">
+                <label asp-for="CourseName" class="form-label fw-bold">Course / Degree</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-mortarboard text-primary"></i></span>
+                    <select class="form-select" asp-for="CourseName">
+                        <option value="">-- Select Course --</option>
+                        @foreach (var course in (List<string>)ViewBag.Courses)
+                        {
+                            <option value="@course">@course</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="CourseName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Faculty / Staff -->
+            <div class="col-md-4">
+                <label asp-for="StaffName" class="form-label fw-bold">Assigned Faculty</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user-tie text-primary"></i></span>
+                    <select class="form-select" asp-for="StaffName">
+                        <option value="">-- Select Faculty --</option>
+                        @foreach (var staff in (List<string>)ViewBag.Staffs)
+                        {
+                            <option value="@staff">@staff</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="StaffName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Classroom -->
+            <div class="col-md-4">
+                <label asp-for="ClassroomName" class="form-label fw-bold">Classroom / Lab</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-school text-primary"></i></span>
+                    <select class="form-select" asp-for="ClassroomName">
+                        <option value="">-- Select Classroom --</option>
+                        @foreach (var room in (List<string>)ViewBag.Classrooms)
+                        {
+                            <option value="@room">@room</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="ClassroomName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Schedule</button>
+                <a asp-controller="Timetable" asp-action="TimetableList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
