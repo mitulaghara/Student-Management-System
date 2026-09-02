@@ -1,0 +1,103 @@
+@model StudentManagementSystem.Models.Mark
+
+<div class="pagetitle">
+    <h1>Add / Edit Exam Marks</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Mark" asp-action="MarkList"><i class="fa-solid fa-award"></i> Marks</a></li>
+            <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> @(Model.MarkID == 0 ? "Add Marks" : "Edit Marks")</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body p-5">
+        <form asp-controller="Mark" asp-action="Save" method="post" class="row g-3">
+            <input type="hidden" asp-for="MarkID" />
+
+            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+                <span>@(Model.MarkID == 0 ? "Record Exam Marks" : "Edit Marks Record")</span>
+            </div>
+
+            <!-- Student Selection -->
+            <div class="col-md-6">
+                <label asp-for="StudentID" class="form-label fw-bold">Select Student</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user-graduate text-primary"></i></span>
+                    <select class="form-select" asp-for="StudentID">
+                        <option value="">-- Select Student --</option>
+                        @foreach (var std in (List<StudentManagementSystem.Models.Student>)ViewBag.Students)
+                        {
+                            <option value="@std.StudentID">@std.StudentName</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="StudentID" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Course Selection -->
+            <div class="col-md-6">
+                <label asp-for="CourseName" class="form-label fw-bold">Course / Subject</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-book text-primary"></i></span>
+                    <select class="form-select" asp-for="CourseName">
+                        <option value="">-- Select Course --</option>
+                        @foreach (var course in (List<string>)ViewBag.Courses)
+                        {
+                            <option value="@course">@course</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="CourseName" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Exam Type -->
+            <div class="col-md-4">
+                <label asp-for="ExamType" class="form-label fw-bold">Exam Type</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-journal-check text-primary"></i></span>
+                    <select class="form-select" asp-for="ExamType">
+                        <option value="Mid-Term">Mid-Term Exam</option>
+                        <option value="Final">Final Exam</option>
+                        <option value="Practical">Practical / Lab Test</option>
+                        <option value="Quiz">Class Quiz</option>
+                        <option value="Assignment">Assignment</option>
+                    </select>
+                </div>
+                <span asp-validation-for="ExamType" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Marks Obtained -->
+            <div class="col-md-4">
+                <label asp-for="MarksObtained" class="form-label fw-bold">Marks Obtained</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calculator text-primary"></i></span>
+                    <input type="number" class="form-control" asp-for="MarksObtained" placeholder="e.g. 85" />
+                </div>
+                <span asp-validation-for="MarksObtained" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Total Marks -->
+            <div class="col-md-4">
+                <label asp-for="TotalMarks" class="form-label fw-bold">Total Marks</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-award text-primary"></i></span>
+                    <input type="number" class="form-control" asp-for="TotalMarks" placeholder="e.g. 100" />
+                </div>
+                <span asp-validation-for="TotalMarks" class="text-danger fw-bold fs-7"></span>
+            </div>
+
+            <!-- Remarks -->
+            <div class="col-12">
+                <label asp-for="Remarks" class="form-label fw-bold">Remarks / Feedback</label>
+                <textarea class="form-control" rows="3" placeholder="Enter teacher feedback or exam notes..." asp-for="Remarks"></textarea>
+            </div>
+
+            <div class="col-12 mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Marks</button>
+                <a asp-controller="Mark" asp-action="MarkList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

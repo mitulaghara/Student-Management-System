@@ -23,6 +23,7 @@ namespace StudentManagementSystem.Services
         public IMongoCollection<Enrollment> Enrollments => _database.GetCollection<Enrollment>("Enrollments");
         public IMongoCollection<UserLoginModel> Users => _database.GetCollection<UserLoginModel>("Users");
         public IMongoCollection<Attendance> Attendances => _database.GetCollection<Attendance>("Attendances");
+        public IMongoCollection<Mark> Marks => _database.GetCollection<Mark>("Marks");
 
         public void SeedInitialData()
         {
@@ -109,6 +110,17 @@ namespace StudentManagementSystem.Services
                         new Attendance { AttendanceID = 1, StudentID = 1, StudentName = "Maulik Ghara", AttendanceDate = DateTime.Today, Status = "Present", Subject = "Web Development with .NET", Remarks = "", Created = DateTime.Now, Modified = DateTime.Now },
                         new Attendance { AttendanceID = 2, StudentID = 2, StudentName = "Aarav Sharma", AttendanceDate = DateTime.Today, Status = "Absent", Subject = "Database Management Systems", Remarks = "Medical Leave", Created = DateTime.Now, Modified = DateTime.Now },
                         new Attendance { AttendanceID = 3, StudentID = 3, StudentName = "Priya Patel", AttendanceDate = DateTime.Today, Status = "Late", Subject = "Object Oriented Programming", Remarks = "Traffic delay", Created = DateTime.Now, Modified = DateTime.Now }
+                    });
+                }
+
+                // Seed Marks
+                if (Marks.CountDocuments(FilterDefinition<Mark>.Empty) == 0)
+                {
+                    Marks.InsertMany(new[]
+                    {
+                        new Mark { MarkID = 1, StudentID = 1, StudentName = "Maulik Ghara", CourseName = "Web Development with .NET", ExamType = "Mid-Term", MarksObtained = 88, TotalMarks = 100, Grade = "A+", Remarks = "Excellent performance", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Mark { MarkID = 2, StudentID = 2, StudentName = "Aarav Sharma", CourseName = "Database Management Systems", ExamType = "Practical", MarksObtained = 76, TotalMarks = 100, Grade = "B+", Remarks = "Good practical skills", Created = DateTime.Now, Modified = DateTime.Now },
+                        new Mark { MarkID = 3, StudentID = 3, StudentName = "Priya Patel", CourseName = "Object Oriented Programming", ExamType = "Final", MarksObtained = 92, TotalMarks = 100, Grade = "A+", Remarks = "Outstanding results", Created = DateTime.Now, Modified = DateTime.Now }
                     });
                 }
             }
