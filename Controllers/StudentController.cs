@@ -139,6 +139,31 @@ namespace StudentManagementSystem.Controllers
             return RedirectToAction("StudentList");
         }
 
+        public IActionResult ExportToCsv()
+        {
+            List<Student> students;
+            try
+            {
+                students = _mongoDbService.Students.Find(FilterDefinition<Student>.Empty).ToList();
+            }
+            catch (Exception)
+            {
+                students = new List<Student>();
+            }
+
+            var builder = new System.Text.StringBuilder();
+            builder.AppendLine("StudentID,RollNo,StudentName,Department,Course,Classroom,MobileNo,EmailAddress,Status");
+
+            foreach (var s in students)
+            {
+                string status = s.IsActive ? "Active" : "Dropped";
+                builder.AppendLine($"\"{s.StudentID}\",\"{s.RollNo}\",\"{s.StudentName}\",\"{s.DepartmentName}\",\"{s.CourseName}\",\"{s.ClassroomName}\",\"{s.MobileNo}\",\"{s.EmailAddress}\",\"{status}\"");
+            }
+
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(builder.ToString());
+            return File(buffer, "text/csv", $"Students_Export_{DateTime.Now:yyyyMMdd_HHmm}.csv");
+        }
+
         private void PopulateDropdowns()
         {
             try

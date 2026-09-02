@@ -133,6 +133,30 @@ namespace StudentManagementSystem.Controllers
             return RedirectToAction("AttendanceList");
         }
 
+        public IActionResult ExportToCsv()
+        {
+            List<Attendance> attendances;
+            try
+            {
+                attendances = _mongoDbService.Attendances.Find(FilterDefinition<Attendance>.Empty).ToList();
+            }
+            catch (Exception)
+            {
+                attendances = new List<Attendance>();
+            }
+
+            var builder = new System.Text.StringBuilder();
+            builder.AppendLine("AttendanceID,StudentID,StudentName,Date,Subject,Status,Remarks");
+
+            foreach (var a in attendances)
+            {
+                builder.AppendLine($"\"{a.AttendanceID}\",\"{a.StudentID}\",\"{a.StudentName}\",\"{a.AttendanceDate:yyyy-MM-dd}\",\"{a.Subject}\",\"{a.Status}\",\"{a.Remarks}\"");
+            }
+
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(builder.ToString());
+            return File(buffer, "text/csv", $"Attendance_Export_{DateTime.Now:yyyyMMdd_HHmm}.csv");
+        }
+
         private void PopulateDropdowns()
         {
             try
