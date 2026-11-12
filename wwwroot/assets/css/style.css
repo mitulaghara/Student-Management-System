@@ -42,6 +42,12 @@
   --bs-link-hover-color-rgb: 243, 112, 33;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   background: var(--mu-bg);
@@ -1456,8 +1462,48 @@ button,
 /* Simple-DataTables Responsive Wrapper & MU Styling */
 .datatable-wrapper {
   width: 100%;
+  overflow-x: visible;
+}
+
+.datatable-container {
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.datatable-top .datatable-dropdown label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.datatable-pagination ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.table td a[title] {
+  min-width: 34px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.dashboard .activity .activity-item .activity-content {
+  min-width: 0;
+  flex: 1;
+  word-break: break-word;
+}
+
+#departmentChart,
+#attendanceChart {
+  width: 100%;
+  overflow: hidden;
 }
 
 .datatable-input,
@@ -1579,30 +1625,51 @@ button,
     padding-right: 10px;
   }
 
+  .header .logo {
+    width: auto;
+    min-width: 0;
+  }
+
   .header .logo img {
-    max-height: 22px;
-    margin-right: 4px;
+    max-height: 26px;
+    padding: 3px;
+    margin-right: 6px;
   }
 
   .header .logo span {
-    font-size: 18px;
+    font-size: 16px;
+    white-space: nowrap;
   }
 
   .header .toggle-sidebar-btn {
     font-size: 26px;
-    padding-left: 6px;
+    padding-left: 8px;
   }
 
   .header-nav .nav-profile img {
     max-height: 30px;
   }
 
+  .header-nav .profile {
+    min-width: 210px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .sidebar {
+    width: min(82vw, 290px);
+    left: -100vw;
+    padding: 14px;
+  }
+
   .pagetitle h1 {
-    font-size: 20px;
+    font-size: 19px;
+    line-height: 1.3;
   }
 
   .breadcrumb {
     font-size: 12px;
+    flex-wrap: wrap;
+    row-gap: 4px;
   }
 
   .card {
@@ -1616,7 +1683,25 @@ button,
 
   .card-title {
     font-size: 16px;
-    padding: 10px 0;
+    padding: 8px 0 10px 0;
+  }
+
+  .dashboard .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+
+  .dashboard .info-card h6 {
+    font-size: 22px;
+  }
+
+  .mu-login-page {
+    padding: 12px 0;
+  }
+
+  .mu-login-card .card-body {
+    padding: 1.25rem !important;
   }
 
   /* Full width action toolbar buttons on small mobile */
@@ -1671,16 +1756,37 @@ button,
   .datatable-bottom {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    text-align: center;
   }
 
   .datatable-pagination {
     margin-left: 0 !important;
+    width: 100%;
+  }
+
+  .datatable-pagination a,
+  .datatable-pagination button {
+    padding: 5px 10px;
+    font-size: 13px;
   }
 
   .footer {
-    padding: 15px 10px;
+    padding: 15px 12px;
     font-size: 12px;
+    word-break: break-word;
+  }
+}
+
+/* Mobile Landscape Orientation */
+@media (max-height: 500px) and (max-width: 1199.98px) {
+  .sidebar {
+    padding: 12px;
+  }
+
+  .sidebar-nav .nav-link {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
 
