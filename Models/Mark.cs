@@ -18,7 +18,7 @@ namespace StudentManagementSystem.Models
         public string? CourseName { get; set; }
 
         [Required(ErrorMessage = "Exam Type is required")]
-        public string? ExamType { get; set; } // Internal, External, Practical
+        public string? ExamType { get; set; }
 
         [Required(ErrorMessage = "Marks Obtained is required")]
         [Range(0, 1000, ErrorMessage = "Marks Obtained must be between 0 and 1000")]
@@ -28,7 +28,8 @@ namespace StudentManagementSystem.Models
         [Range(1, 1000, ErrorMessage = "Total Marks must be between 1 and 1000")]
         public int TotalMarks { get; set; }
 
-        public string? Grade { get; set; } // Auto-calculated: A+, A, B, C, D, F
+        // Derived from MarksObtained / TotalMarks on save
+        public string? Grade { get; set; }
 
         public string? Remarks { get; set; }
 

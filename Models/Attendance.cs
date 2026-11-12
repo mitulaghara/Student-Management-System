@@ -19,7 +19,7 @@ namespace StudentManagementSystem.Models
         public DateTime AttendanceDate { get; set; }
 
         [Required(ErrorMessage = "Please select Attendance Status")]
-        public string? Status { get; set; } // Present, Absent, Late
+        public string? Status { get; set; }
 
         public string? Subject { get; set; }
 

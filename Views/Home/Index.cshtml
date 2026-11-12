@@ -9,12 +9,10 @@
             <li class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
 
 <section class="section dashboard">
-    <!-- Quick Statistics KPI Cards -->
     <div class="row g-3 mb-3">
-        <!-- Students Card -->
         <div class="col-12 col-sm-6 col-xxl-3">
             <div class="card info-card sales-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
@@ -32,7 +30,6 @@
             </div>
         </div>
 
-        <!-- Faculty / Staff Card -->
         <div class="col-12 col-sm-6 col-xxl-3">
             <div class="card info-card revenue-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
@@ -50,7 +47,6 @@
             </div>
         </div>
 
-        <!-- Courses Card -->
         <div class="col-12 col-sm-6 col-xxl-3">
             <div class="card info-card customers-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
@@ -68,7 +64,6 @@
             </div>
         </div>
 
-        <!-- Attendance Card -->
         <div class="col-12 col-sm-6 col-xxl-3">
             <div class="card info-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
@@ -87,7 +82,6 @@
         </div>
     </div>
 
-    <!-- Secondary Row: Secondary Stats -->
     <div class="row g-3 mb-4">
         <div class="col-12 col-sm-6 col-lg-3">
             <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-primary d-flex align-items-center justify-content-between h-100">
@@ -127,9 +121,7 @@
         </div>
     </div>
 
-    <!-- Charts and Tables -->
     <div class="row">
-        <!-- Left Side: Interactive Charts -->
         <div class="col-lg-8">
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
@@ -138,7 +130,6 @@
                 </div>
             </div>
 
-            <!-- Recent Students Table -->
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
@@ -186,9 +177,7 @@
             </div>
         </div>
 
-        <!-- Right Side: Attendance Breakdown & Campus Notices -->
         <div class="col-lg-4">
-            <!-- Attendance Donut Chart -->
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Attendance Ratio <span>| Overview</span></h5>
@@ -196,7 +185,6 @@
                 </div>
             </div>
 
-            <!-- Notice Board Widget -->
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
@@ -224,14 +212,12 @@
     </div>
 </section>
 
-<!-- Google Charts Loader -->
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     google.charts.load('current', {packages:['corechart']});
     google.charts.setOnLoadCallback(drawCharts);
 
     function drawCharts() {
-        // Department Distribution Chart (Live Database Data)
         var deptRows = [
             ['Department', 'Students Enrolled']
         ];
@@ -270,7 +256,6 @@
         var deptChart = new google.visualization.ColumnChart(document.getElementById('departmentChart'));
         deptChart.draw(deptData, deptOptions);
 
-        // Attendance Breakdown Donut Chart (Live Database Data)
         var attData = google.visualization.arrayToDataTable([
             ['Status', 'Count'],
             ['Present', @(ViewBag.PresentCount ?? 0)],
@@ -291,7 +276,7 @@
         attChart.draw(attData, attOptions);
     }
 
-    // Auto-redraw charts on window resize, orientation change, or sidebar toggle
+    // Debounce chart redraws for viewport rotation and sidebar toggle width changes
     (function() {
         var chartResizeTimer;
         var redraw = function() {

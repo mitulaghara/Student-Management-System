@@ -77,7 +77,6 @@ namespace StudentManagementSystem.Controllers
                 return View("MarkAddEdit", model);
             }
 
-            // Calculate Grade based on percentage
             if (model.TotalMarks > 0)
             {
                 double percentage = ((double)model.MarksObtained / model.TotalMarks) * 100;
@@ -94,7 +93,7 @@ namespace StudentManagementSystem.Controllers
                 model.Grade = "N/A";
             }
 
-            // Populate Student name from DB
+            // Denormalize student name to avoid per-row lookups on list view
             try
             {
                 var student = _mongoDbService.Students.Find(s => s.StudentID == model.StudentID).FirstOrDefault();

@@ -75,7 +75,7 @@ namespace StudentManagementSystem.Controllers
                 return View("StudentAddEdit", model);
             }
 
-            // Set drop info if student is inactive
+            // Preserve or clear drop metadata based on active status
             if (!model.IsActive)
             {
                 if (model.DropDate == null) model.DropDate = DateTime.Now;

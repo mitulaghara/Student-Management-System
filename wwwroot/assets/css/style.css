@@ -1,14 +1,4 @@
-/**
-* Template Name: NiceAdmin
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Updated: Apr 20 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General & Marwadi University Theme Tokens
---------------------------------------------------------------*/
+/* Theme Variables & Base Styles */
 :root {
   scroll-behavior: smooth;
   --mu-navy: #003366;
@@ -24,8 +14,6 @@
   --mu-border: #dce5f0;
   --mu-text: #2d3748;
   --mu-muted: #5a6d87;
-
-  /* Bootstrap 5 Theme Variable Overrides */
   --bs-primary: #003366;
   --bs-primary-rgb: 0, 51, 102;
   --bs-primary-text-emphasis: #002244;
@@ -72,8 +60,6 @@ h5,
 h6 {
   font-family: "Nunito", sans-serif;
 }
-
-/* Bootstrap Component Overrides for Marwadi University Theme */
 .btn-primary {
   --bs-btn-color: #ffffff;
   --bs-btn-bg: #003366;
@@ -147,9 +133,7 @@ h6 {
   color: #ffffff;
 }
 
-/*--------------------------------------------------------------
-# Main
---------------------------------------------------------------*/
+/* Main */
 #main {
   margin-top: 60px;
   padding: 20px 30px;
@@ -162,9 +146,7 @@ h6 {
   }
 }
 
-/*--------------------------------------------------------------
-# Page Title
---------------------------------------------------------------*/
+/* Page Title */
 .pagetitle {
   margin-bottom: 10px;
 }
@@ -176,9 +158,7 @@ h6 {
   color: var(--mu-navy-dark);
 }
 
-/*--------------------------------------------------------------
-# Back to top button
---------------------------------------------------------------*/
+/* Back to top button */
 .back-to-top {
   position: fixed;
   visibility: hidden;
@@ -210,10 +190,7 @@ h6 {
   opacity: 1;
 }
 
-/*--------------------------------------------------------------
-# Override some default Bootstrap stylings
---------------------------------------------------------------*/
-/* Dropdown menus */
+/* Override some default Bootstrap stylings */
 .dropdown-menu {
   border-radius: 6px;
   padding: 10px 0;
@@ -291,8 +268,6 @@ h6 {
     opacity: 0;
   }
 }
-
-/* Light Backgrounds */
 .bg-primary-light {
   background-color: #e3ecf5;
   border-color: #e3ecf5;
@@ -327,8 +302,6 @@ h6 {
   background-color: #d3d3d4;
   border-color: #d3d3d4;
 }
-
-/* Card */
 .card {
   margin-bottom: 30px;
   border: 1px solid #e6edf5;
@@ -365,15 +338,11 @@ h6 {
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
 }
-
-/* Alerts */
 .alert-heading {
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
 }
-
-/* Close Button */
 .btn-close {
   background-size: 25%;
 }
@@ -382,8 +351,6 @@ h6 {
   outline: 0;
   box-shadow: none;
 }
-
-/* Accordion */
 .accordion-item {
   border: 1px solid var(--mu-border);
 }
@@ -414,8 +381,6 @@ h6 {
   color: var(--mu-text);
   font-size: 15px;
 }
-
-/* Breadcrumbs */
 .breadcrumb {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
@@ -440,8 +405,6 @@ h6 {
   color: var(--mu-navy);
   font-weight: 600;
 }
-
-/* Bordered Tabs */
 .nav-tabs-bordered {
   border-bottom: 2px solid var(--mu-border);
 }
@@ -463,9 +426,7 @@ h6 {
   border-bottom: 2px solid var(--mu-orange);
 }
 
-/*--------------------------------------------------------------
-# Header (Marwadi University Deep Navy + Saffron Accent)
---------------------------------------------------------------*/
+/* Header */
 .logo {
   line-height: 1;
 }
@@ -515,8 +476,6 @@ h6 {
   background: linear-gradient(90deg, #002244 0%, #003366 60%, #005577 100%);
   border-bottom: 3px solid var(--mu-orange);
   padding-left: 20px;
-  /* Toggle Sidebar Button */
-  /* Search Bar */
 }
 
 .header .toggle-sidebar-btn {
@@ -591,9 +550,7 @@ h6 {
   color: var(--mu-navy);
 }
 
-/*--------------------------------------------------------------
-# Header Nav
---------------------------------------------------------------*/
+/* Header Nav */
 .header-nav ul {
   list-style: none;
 }
@@ -737,9 +694,7 @@ h6 {
   background-color: var(--mu-surface-soft);
 }
 
-/*--------------------------------------------------------------
-# Sidebar
---------------------------------------------------------------*/
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 60px;
@@ -798,8 +753,6 @@ h6 {
     left: -300px;
   }
 }
-
-/* Sidebar Backdrop / Overlay for Mobile Devices */
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -925,10 +878,7 @@ h6 {
   background-color: var(--mu-orange);
 }
 
-/*--------------------------------------------------------------
-# Dashboard
---------------------------------------------------------------*/
-/* Filter dropdown */
+/* Dashboard */
 .dashboard .filter {
   position: absolute;
   right: 0px;
@@ -965,8 +915,6 @@ h6 {
 .dashboard .filter .dropdown-item {
   padding: 8px 15px;
 }
-
-/* Info Cards */
 .dashboard .info-card {
   padding-bottom: 10px;
 }
@@ -1002,8 +950,6 @@ h6 {
   color: var(--mu-orange);
   background: #fff1e8;
 }
-
-/* Activity */
 .dashboard .activity {
   font-size: 14px;
 }
@@ -1049,8 +995,6 @@ h6 {
 .dashboard .activity .activity-item:last-child .activity-content {
   padding-bottom: 0;
 }
-
-/* News & Updates */
 .dashboard .news .post-item+.post-item {
   margin-top: 15px;
 }
@@ -1082,8 +1026,6 @@ h6 {
   color: #777777;
   margin-left: 95px;
 }
-
-/* Recent Sales */
 .dashboard .recent-sales {
   font-size: 14px;
 }
@@ -1103,8 +1045,6 @@ h6 {
 .dashboard .recent-sales .dataTable-bottom {
   padding: 10px 0 0 0;
 }
-
-/* Top Selling */
 .dashboard .top-selling {
   font-size: 14px;
 }
@@ -1126,9 +1066,7 @@ h6 {
   max-width: 60px;
 }
 
-/*--------------------------------------------------------------
-# Icons list page
---------------------------------------------------------------*/
+/* Icons list page */
 .iconslist {
   display: grid;
   max-width: 100%;
@@ -1162,9 +1100,7 @@ h6 {
   color: #666;
 }
 
-/*--------------------------------------------------------------
-# Profie Page
---------------------------------------------------------------*/
+/* Profie Page */
 .profile .profile-card img {
   max-width: 120px;
 }
@@ -1216,9 +1152,7 @@ h6 {
   max-width: 120px;
 }
 
-/*--------------------------------------------------------------
-# F.A.Q Page
---------------------------------------------------------------*/
+/* F.A.Q Page */
 .faq .basic h6 {
   font-size: 18px;
   font-weight: 600;
@@ -1229,9 +1163,7 @@ h6 {
   color: var(--mu-muted);
 }
 
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
+/* Contact */
 .contact .info-box {
   padding: 28px 30px;
 }
@@ -1340,9 +1272,7 @@ h6 {
   }
 }
 
-/*--------------------------------------------------------------
-# Error 404
---------------------------------------------------------------*/
+/* Error 404 */
 .error-404 {
   padding: 30px;
 }
@@ -1378,9 +1308,7 @@ h6 {
   }
 }
 
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
+/* Footer */
 .footer {
   padding: 20px 0;
   font-size: 14px;
@@ -1404,11 +1332,7 @@ h6 {
   color: var(--mu-navy);
 }
 
-/*--------------------------------------------------------------
-# Comprehensive Multi-Device Responsiveness (Mobile, Tablet, Desktop)
---------------------------------------------------------------*/
-
-/* Touch-friendly touch targets */
+/* Responsive Layout & DataTables */
 button,
 .btn,
 .nav-link,
@@ -1416,8 +1340,6 @@ button,
 .page-link {
   touch-action: manipulation;
 }
-
-/* Fluid Table Wrappers & Touch Scrolling */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -1458,8 +1380,7 @@ button,
 .table td a {
   display: inline-block;
 }
-
-/* Simple-DataTables Responsive Wrapper & MU Styling */
+/* Keep search/pagination fixed while scrolling table horizontally */
 .datatable-wrapper {
   width: 100%;
   overflow-x: visible;
@@ -1559,8 +1480,6 @@ button,
   gap: 12px;
   padding: 10px 0 !important;
 }
-
-/* Fluid Action Toolbar */
 .action-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -1580,8 +1499,6 @@ button,
   gap: 8px;
   align-items: center;
 }
-
-/* Marwadi University Login Page Theme */
 .mu-login-page {
   background: linear-gradient(135deg, #001f3f 0%, #003366 55%, #006d7a 100%);
   min-height: 100vh;
@@ -1703,8 +1620,6 @@ button,
   .mu-login-card .card-body {
     padding: 1.25rem !important;
   }
-
-  /* Full width action toolbar buttons on small mobile */
   .action-toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -1721,8 +1636,6 @@ button,
     width: 100%;
     justify-content: center;
   }
-
-  /* Form action buttons full-width */
   form .d-flex.gap-2 {
     flex-direction: column;
     gap: 10px !important;
@@ -1731,8 +1644,6 @@ button,
   form .d-flex.gap-2 .btn {
     width: 100%;
   }
-
-  /* Simple-DataTables responsive stacking */
   .datatable-top {
     flex-direction: column;
     align-items: stretch;

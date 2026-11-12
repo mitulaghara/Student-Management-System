@@ -21,13 +21,13 @@ namespace StudentManagementSystem.Models
         public string? StaffName { get; set; }
 
         [Required(ErrorMessage = "Day of Week is required")]
-        public string? DayOfWeek { get; set; } // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+        public string? DayOfWeek { get; set; }
 
         [Required(ErrorMessage = "Start Time is required")]
-        public string? StartTime { get; set; } // e.g. "09:00 AM"
+        public string? StartTime { get; set; }
 
         [Required(ErrorMessage = "End Time is required")]
-        public string? EndTime { get; set; } // e.g. "10:30 AM"
+        public string? EndTime { get; set; }
 
         [Required(ErrorMessage = "Subject Name is required")]
         public string? Subject { get; set; }

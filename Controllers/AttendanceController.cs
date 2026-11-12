@@ -76,7 +76,7 @@ namespace StudentManagementSystem.Controllers
                 return View("AttendanceAddEdit", model);
             }
 
-            // Populate Student name from DB
+            // Denormalize student name to avoid per-row lookups on list view
             try
             {
                 var student = _mongoDbService.Students.Find(s => s.StudentID == model.StudentID).FirstOrDefault();

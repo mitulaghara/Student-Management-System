@@ -16,7 +16,7 @@ namespace StudentManagementSystem.Models
         public string? Content { get; set; }
 
         [Required(ErrorMessage = "Category is required")]
-        public string? Category { get; set; } // Academic, Exam, Holiday, General, Sports
+        public string? Category { get; set; }
 
         [Required(ErrorMessage = "Published Date is required")]
         [DataType(DataType.Date)]

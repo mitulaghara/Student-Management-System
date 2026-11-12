@@ -27,17 +27,18 @@ namespace StudentManagementSystem.Services
         public IMongoCollection<Notice> Notices => _database.GetCollection<Notice>("Notices");
         public IMongoCollection<Timetable> Timetables => _database.GetCollection<Timetable>("Timetables");
 
+        /// <summary>
+        /// Populates default admin credentials and sample academic data on first run.
+        /// </summary>
         public void SeedInitialData()
         {
             try
             {
-                // Seed Admin User
                 if (Users.CountDocuments(FilterDefinition<UserLoginModel>.Empty) == 0)
                 {
                     Users.InsertOne(new UserLoginModel { UserName = "admin", Password = "admin123" });
                 }
 
-                // Seed Departments
                 if (Departments.CountDocuments(FilterDefinition<Department>.Empty) == 0)
                 {
                     Departments.InsertMany(new[]
@@ -49,7 +50,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Staffs
                 if (Staffs.CountDocuments(FilterDefinition<Staff>.Empty) == 0)
                 {
                     Staffs.InsertMany(new[]
@@ -60,7 +60,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Classrooms
                 if (Classrooms.CountDocuments(FilterDefinition<Classroom>.Empty) == 0)
                 {
                     Classrooms.InsertMany(new[]
@@ -72,7 +71,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Courses
                 if (Courses.CountDocuments(FilterDefinition<Course>.Empty) == 0)
                 {
                     Courses.InsertMany(new[]
@@ -83,7 +81,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Students
                 if (Students.CountDocuments(FilterDefinition<Student>.Empty) == 0)
                 {
                     Students.InsertMany(new[]
@@ -94,7 +91,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Enrollments
                 if (Enrollments.CountDocuments(FilterDefinition<Enrollment>.Empty) == 0)
                 {
                     Enrollments.InsertMany(new[]
@@ -104,7 +100,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Attendances
                 if (Attendances.CountDocuments(FilterDefinition<Attendance>.Empty) == 0)
                 {
                     Attendances.InsertMany(new[]
@@ -115,7 +110,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Marks
                 if (Marks.CountDocuments(FilterDefinition<Mark>.Empty) == 0)
                 {
                     Marks.InsertMany(new[]
@@ -126,7 +120,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Notices
                 if (Notices.CountDocuments(FilterDefinition<Notice>.Empty) == 0)
                 {
                     Notices.InsertMany(new[]
@@ -137,7 +130,6 @@ namespace StudentManagementSystem.Services
                     });
                 }
 
-                // Seed Timetables
                 if (Timetables.CountDocuments(FilterDefinition<Timetable>.Empty) == 0)
                 {
                     Timetables.InsertMany(new[]

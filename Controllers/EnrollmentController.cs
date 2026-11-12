@@ -77,7 +77,7 @@ namespace StudentManagementSystem.Controllers
                 return View("EnrollmentAddEdit", model);
             }
 
-            // Populate Student and Staff Names from DB
+            // Denormalize student and staff names to avoid per-row lookups on list view
             try
             {
                 var student = _mongoDbService.Students.Find(s => s.StudentID == model.StudentID).FirstOrDefault();

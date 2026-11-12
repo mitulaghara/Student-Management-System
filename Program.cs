@@ -2,7 +2,6 @@ using StudentManagementSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<MongoDbService>();
@@ -15,14 +14,13 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Seed MongoDB Initial Collections & Admin User
+// Ensure initial MongoDB collections and default admin exist on startup
 using (var scope = app.Services.CreateScope())
 {
     var mongoService = scope.ServiceProvider.GetRequiredService<MongoDbService>();
     mongoService.SeedInitialData();
 }
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

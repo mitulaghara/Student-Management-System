@@ -9,7 +9,7 @@
             <li class="breadcrumb-item active"><i class="bi bi-pencil-square"></i> @(Model.NoticeID == 0 ? "Publish Notice" : "Edit Notice")</li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
 
 <div class="card">
     <div class="card-body p-3 p-sm-4 p-md-5">
@@ -20,7 +20,6 @@
                 <span>@(Model.NoticeID == 0 ? "Publish Campus Notice" : "Edit Notice Details")</span>
             </div>
 
-            <!-- Title -->
             <div class="col-12 col-md-8">
                 <label asp-for="Title" class="form-label fw-bold">Notice Title</label>
                 <div class="input-group">
@@ -30,7 +29,6 @@
                 <span asp-validation-for="Title" class="text-danger fw-bold fs-7"></span>
             </div>
 
-            <!-- Category -->
             <div class="col-12 col-md-4">
                 <label asp-for="Category" class="form-label fw-bold">Category</label>
                 <div class="input-group">
@@ -46,7 +44,6 @@
                 <span asp-validation-for="Category" class="text-danger fw-bold fs-7"></span>
             </div>
 
-            <!-- Published Date -->
             <div class="col-12 col-md-6">
                 <label asp-for="PublishedDate" class="form-label fw-bold">Publish Date</label>
                 <div class="input-group">
@@ -56,7 +53,6 @@
                 <span asp-validation-for="PublishedDate" class="text-danger fw-bold fs-7"></span>
             </div>
 
-            <!-- Active Status -->
             <div class="col-12 col-md-6 d-flex align-items-center mt-2 mt-md-4">
                 <div class="form-check form-switch fs-5">
                     <input class="form-check-input" type="checkbox" role="switch" id="noticeActiveSwitch" asp-for="IsActive">
@@ -64,7 +60,6 @@
                 </div>
             </div>
 
-            <!-- Notice Content -->
             <div class="col-12">
                 <label asp-for="Content" class="form-label fw-bold">Notice Content / Description</label>
                 <textarea class="form-control" rows="5" placeholder="Write full details of the notice or announcement here..." asp-for="Content"></textarea>

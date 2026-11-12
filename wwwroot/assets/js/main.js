@@ -1,17 +1,6 @@
-/**
-* Template Name: NiceAdmin
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Updated: Apr 20 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
   const select = (el, all = false) => {
     el = el.trim()
     if (all) {
@@ -21,9 +10,6 @@
     }
   }
 
-  /**
-   * Easy event listener function
-   */
   const on = (type, el, listener, all = false) => {
     if (all) {
       select(el, all).forEach(e => e.addEventListener(type, listener))
@@ -35,30 +21,23 @@
     }
   }
 
-  /**
-   * Easy on scroll event listener 
-   */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
 
-  /**
-   * Sidebar toggle & mobile overlay
-   */
+  // Sidebar drawer toggle and auto-close on mobile navigation
   if (select('.toggle-sidebar-btn')) {
     on('click', '.toggle-sidebar-btn', function(e) {
       select('body').classList.toggle('toggle-sidebar')
     })
   }
 
-  // Close sidebar on mobile when overlay is clicked
   if (select('#sidebar-overlay')) {
     on('click', '#sidebar-overlay', function(e) {
       select('body').classList.remove('toggle-sidebar')
     })
   }
 
-  // Close sidebar on mobile when a nav item link is clicked
   const sidebarLinks = select('#sidebar-nav .nav-link', true);
   if (sidebarLinks.length) {
     sidebarLinks.forEach(link => {
@@ -70,18 +49,12 @@
     });
   }
 
-  /**
-   * Search bar toggle
-   */
   if (select('.search-bar-toggle')) {
     on('click', '.search-bar-toggle', function(e) {
       select('.search-bar').classList.toggle('search-bar-show')
     })
   }
 
-  /**
-   * Navbar links active state on scroll
-   */
   let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
     let position = window.scrollY + 200
@@ -99,9 +72,6 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
-   */
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
@@ -115,9 +85,6 @@
     onscroll(document, headerScrolled)
   }
 
-  /**
-   * Back to top button
-   */
   let backtotop = select('.back-to-top')
   if (backtotop) {
     const toggleBacktotop = () => {
@@ -131,17 +98,11 @@
     onscroll(document, toggleBacktotop)
   }
 
-  /**
-   * Initiate tooltips
-   */
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
   })
 
-  /**
-   * Initiate Datatables
-   */
   if (typeof simpleDatatables !== 'undefined') {
     const datatables = select('.datatable', true)
     datatables.forEach(datatable => {
@@ -160,9 +121,7 @@
     })
   }
 
-  /**
-   * Autoresize echart charts
-   */
+  // Keep ECharts sized correctly when sidebar collapses/expands
   const mainContainer = select('#main');
   if (mainContainer && typeof echarts !== 'undefined') {
     setTimeout(() => {

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace StudentManagementSystem.Filters
 {
+    /// <summary>
+    /// Redirects unauthenticated requests to the login page when the session expires.
+    /// </summary>
     public class CheckAccess : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
