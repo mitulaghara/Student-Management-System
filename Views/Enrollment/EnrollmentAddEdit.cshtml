@@ -12,16 +12,16 @@
 </div><!-- End Page Title -->
 
 <div class="card">
-    <div class="card-body p-5">
+    <div class="card-body p-3 p-sm-4 p-md-5">
         <form asp-controller="Enrollment" asp-action="Save" method="post" class="row g-3">
             <input type="hidden" asp-for="EnrollmentID" />
 
-            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+            <div class="col-12 fs-3 fw-bold mb-3 border-bottom pb-2">
                 <span>@(Model.EnrollmentID == 0 ? "Assign Advisor to Student" : "Edit Advising Assignment")</span>
             </div>
 
             <!-- Student Selection -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="StudentID" class="form-label fw-bold">Select Student</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-user-graduate text-primary"></i></span>
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Staff Selection -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="StaffID" class="form-label fw-bold">Select Staff / Advisor</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-user-tie text-primary"></i></span>
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Active Status -->
-            <div class="col-md-12 mt-3">
+            <div class="col-12 mt-3">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="isActiveEnrollmentSwitch" asp-for="IsActive">
                     <label class="form-check-label fw-bold" for="isActiveEnrollmentSwitch">Active Mentorship / Advising Status?</label>
@@ -67,7 +67,7 @@
                 <span asp-validation-for="Remarks" class="text-danger fw-bold fs-7"></span>
             </div>
 
-            <div class="col-12 mt-4 d-flex gap-2">
+            <div class="col-12 mt-4 d-flex flex-column flex-sm-row gap-2">
                 <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Assignment</button>
                 <a asp-controller="Enrollment" asp-action="EnrollmentList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
             </div>

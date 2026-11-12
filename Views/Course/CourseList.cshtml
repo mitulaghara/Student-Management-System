@@ -25,62 +25,60 @@
     </div>
 }
 
-<div class="m-2">
-    <div class="bg-primary-subtle rounded row pt-2 pb-2 align-items-center">
-        <div class="col-7"></div>
-        <div class="col-5 text-end pe-4">
-            <a asp-controller="Course" asp-action="CourseAddEdit" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i> Add Course</a>
-        </div>
+<div class="action-toolbar mb-3">
+    <span class="fw-semibold text-muted fs-6">Academic Courses</span>
+    <div class="action-btns">
+        <a asp-controller="Course" asp-action="CourseAddEdit" class="btn btn-primary"><i class="bi bi-plus-square-fill me-1"></i> Add Course</a>
     </div>
 </div>
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-12">
-
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Offered Academic Courses</h5>
 
-                    <!-- Table with stripped rows -->
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Course ID</th>
-                                <th>Course Name</th>
-                                <th>Remarks / Description</th>
-                                <th class="text-center">Created</th>
-                                <th class="text-center">Modified</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                    <!-- Responsive Table Wrapper -->
+                    <div class="table-responsive">
+                        <table class="table datatable">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">@item.CourseID</td>
-                                    <td><strong>@item.CourseName</strong></td>
-                                    <td>@(string.IsNullOrEmpty(item.Remarks) ? "--" : item.Remarks)</td>
-                                    <td class="text-center">@item.Created.ToString("yyyy-MM-dd HH:mm")</td>
-                                    <td class="text-center">@item.Modified.ToString("yyyy-MM-dd HH:mm")</td>
-                                    <td class="text-center">
-                                        <a asp-controller="Course" asp-action="CourseAddEdit" asp-route-id="@item.CourseID" class="text-warning me-3" title="Edit Course">
-                                            <i class="bi bi-pencil-square fs-5"></i>
-                                        </a>
-                                        <a asp-controller="Course" asp-action="Delete" asp-route-id="@item.CourseID" class="text-danger" title="Delete Course"
-                                           onclick="return confirm('Are you sure you want to delete this course?')">
-                                            <i class="bi bi-trash fs-5"></i>
-                                        </a>
-                                    </td>
+                                    <th class="text-center" style="min-width: 90px;">Course ID</th>
+                                    <th style="min-width: 160px;">Course Name</th>
+                                    <th style="min-width: 180px;">Remarks / Description</th>
+                                    <th class="text-center" style="min-width: 140px;">Created</th>
+                                    <th class="text-center" style="min-width: 140px;">Modified</th>
+                                    <th class="text-center" style="min-width: 90px;">Actions</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <!-- End Table with stripped rows -->
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.CourseID</td>
+                                        <td><strong>@item.CourseName</strong></td>
+                                        <td>@(string.IsNullOrEmpty(item.Remarks) ? "--" : item.Remarks)</td>
+                                        <td class="text-center" style="white-space: nowrap;">@item.Created.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td class="text-center" style="white-space: nowrap;">@item.Modified.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td class="text-center" style="white-space: nowrap;">
+                                            <a asp-controller="Course" asp-action="CourseAddEdit" asp-route-id="@item.CourseID" class="text-warning me-2" title="Edit Course">
+                                                <i class="bi bi-pencil-square fs-5"></i>
+                                            </a>
+                                            <a asp-controller="Course" asp-action="Delete" asp-route-id="@item.CourseID" class="text-danger" title="Delete Course"
+                                               onclick="return confirm('Are you sure you want to delete this course?')">
+                                                <i class="bi bi-trash fs-5"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Responsive Table Wrapper -->
 
                 </div>
             </div>
-
         </div>
     </div>
 </section>

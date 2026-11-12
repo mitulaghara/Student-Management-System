@@ -1,7 +1,7 @@
 @model List<Enrollment>
 
 <div class="pagetitle">
-    <h1>Student Advising & Enrollments</h1>
+    <h1>Student Advising &amp; Enrollments</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
@@ -25,73 +25,71 @@
     </div>
 }
 
-<div class="m-2">
-    <div class="bg-primary-subtle rounded row pt-2 pb-2 align-items-center">
-        <div class="col-7"></div>
-        <div class="col-5 text-end pe-4">
-            <a asp-controller="Enrollment" asp-action="EnrollmentAddEdit" class="btn btn-primary"><i class="bi bi-plus-square-fill"></i> Assign Advisor / Mentor</a>
-        </div>
+<div class="action-toolbar mb-3">
+    <span class="fw-semibold text-muted fs-6">Mentorship Assignments</span>
+    <div class="action-btns">
+        <a asp-controller="Enrollment" asp-action="EnrollmentAddEdit" class="btn btn-primary"><i class="bi bi-plus-square-fill me-1"></i> Assign Advisor / Mentor</a>
     </div>
 </div>
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-12">
-
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Student - Staff Mentorship Assignments</h5>
 
-                    <!-- Table with stripped rows -->
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Enrollment ID</th>
-                                <th>Student Name</th>
-                                <th>Assigned Advisor (Staff)</th>
-                                <th class="text-center">Status</th>
-                                <th>Remarks</th>
-                                <th class="text-center">Created</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                    <!-- Responsive Table Wrapper -->
+                    <div class="table-responsive">
+                        <table class="table datatable">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">@item.EnrollmentID</td>
-                                    <td><strong>@item.StudentName</strong></td>
-                                    <td><i class="bi bi-person-workspace text-primary me-1"></i>@item.StaffName</td>
-                                    <td class="text-center">
-                                        @if (item.IsActive)
-                                        {
-                                            <span class="badge bg-success">Active</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-secondary">Inactive</span>
-                                        }
-                                    </td>
-                                    <td>@(string.IsNullOrEmpty(item.Remarks) ? "--" : item.Remarks)</td>
-                                    <td class="text-center">@item.Created.ToString("yyyy-MM-dd HH:mm")</td>
-                                    <td class="text-center">
-                                        <a asp-controller="Enrollment" asp-action="EnrollmentAddEdit" asp-route-id="@item.EnrollmentID" class="text-warning me-3" title="Edit Assignment">
-                                            <i class="bi bi-pencil-square fs-5"></i>
-                                        </a>
-                                        <a asp-controller="Enrollment" asp-action="Delete" asp-route-id="@item.EnrollmentID" class="text-danger" title="Remove Assignment"
-                                           onclick="return confirm('Are you sure you want to remove this advisor assignment?')">
-                                            <i class="bi bi-trash fs-5"></i>
-                                        </a>
-                                    </td>
+                                    <th class="text-center" style="min-width: 100px;">Enrollment ID</th>
+                                    <th style="min-width: 140px;">Student Name</th>
+                                    <th style="min-width: 150px;">Assigned Advisor (Staff)</th>
+                                    <th class="text-center" style="min-width: 80px;">Status</th>
+                                    <th style="min-width: 120px;">Remarks</th>
+                                    <th class="text-center" style="min-width: 130px;">Created</th>
+                                    <th class="text-center" style="min-width: 90px;">Actions</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <!-- End Table with stripped rows -->
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.EnrollmentID</td>
+                                        <td><strong>@item.StudentName</strong></td>
+                                        <td><i class="bi bi-person-workspace text-primary me-1"></i>@item.StaffName</td>
+                                        <td class="text-center">
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="badge bg-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">Inactive</span>
+                                            }
+                                        </td>
+                                        <td>@(string.IsNullOrEmpty(item.Remarks) ? "--" : item.Remarks)</td>
+                                        <td class="text-center" style="white-space: nowrap;">@item.Created.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td class="text-center" style="white-space: nowrap;">
+                                            <a asp-controller="Enrollment" asp-action="EnrollmentAddEdit" asp-route-id="@item.EnrollmentID" class="text-warning me-2" title="Edit Assignment">
+                                                <i class="bi bi-pencil-square fs-5"></i>
+                                            </a>
+                                            <a asp-controller="Enrollment" asp-action="Delete" asp-route-id="@item.EnrollmentID" class="text-danger" title="Remove Assignment"
+                                               onclick="return confirm('Are you sure you want to remove this advisor assignment?')">
+                                                <i class="bi bi-trash fs-5"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Responsive Table Wrapper -->
 
                 </div>
             </div>
-
         </div>
     </div>
 </section>

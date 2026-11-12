@@ -12,16 +12,16 @@
 </div><!-- End Page Title -->
 
 <div class="card">
-    <div class="card-body p-5">
+    <div class="card-body p-3 p-sm-4 p-md-5">
         <form asp-controller="Student" asp-action="Save" method="post" class="row g-3">
             <input type="hidden" asp-for="StudentID" />
 
-            <div class="col-md-12 fs-3 fw-bold mb-3 border-bottom pb-2">
+            <div class="col-12 fs-3 fw-bold mb-3 border-bottom pb-2">
                 <span>@(Model.StudentID == 0 ? "Register New Student" : "Edit Student Profile")</span>
             </div>
 
             <!-- Student Name -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="StudentName" class="form-label fw-bold">Student Name</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person-fill text-primary"></i></span>
@@ -31,7 +31,7 @@
             </div>
 
             <!-- Roll No -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="RollNo" class="form-label fw-bold">Roll / Enrollment No</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-card-text text-primary"></i></span>
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Email Address -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="EmailAddress" class="form-label fw-bold">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-envelope-fill text-primary"></i></span>
@@ -51,7 +51,7 @@
             </div>
 
             <!-- Mobile No -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="MobileNo" class="form-label fw-bold">Mobile Number</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-telephone-fill text-primary"></i></span>
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Birth Date -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="BirthDate" class="form-label fw-bold">Date of Birth</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-calendar-event-fill text-primary"></i></span>
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Department Dropdown -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="DepartmentName" class="form-label fw-bold">Department</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-building text-primary"></i></span>
@@ -87,7 +87,7 @@
             </div>
 
             <!-- Course Dropdown -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="CourseName" class="form-label fw-bold">Course Program</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-graduation-cap text-primary"></i></span>
@@ -103,7 +103,7 @@
             </div>
 
             <!-- Classroom Dropdown -->
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <label asp-for="ClassroomName" class="form-label fw-bold">Assigned Classroom</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-school text-primary"></i></span>
@@ -119,14 +119,14 @@
             </div>
 
             <!-- Active Status -->
-            <div class="col-md-12 mt-3">
+            <div class="col-12 mt-3">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="isActiveSwitch" asp-for="IsActive">
                     <label class="form-check-label fw-bold" for="isActiveSwitch">Is Active Student?</label>
                 </div>
             </div>
 
-            <div class="col-12 mt-4 d-flex gap-2">
+            <div class="col-12 mt-4 d-flex flex-column flex-sm-row gap-2">
                 <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i> Save Student Record</button>
                 <a asp-controller="Student" asp-action="StudentList" class="btn btn-secondary px-4"><i class="bi bi-x-octagon-fill me-1"></i> Cancel</a>
             </div>

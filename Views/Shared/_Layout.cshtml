@@ -1,5 +1,8 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +10,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Student Management System - SMS Admin</title>
+    <title>Student Management System - Marwadi University</title>
     <meta content="Enterprise Student Management System built with ASP.NET Core & MongoDB" name="description">
     <meta content="student management system, dotnet, mongodb, csharp" name="keywords">
 
@@ -31,7 +34,7 @@
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet" asp-append-version="true">
 </head>
 
 <body>
@@ -42,9 +45,10 @@
         <div class="d-flex align-items-center justify-content-between">
             <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
                 <img src="~/assets/img/logo.png" alt="SMS Logo">
-                <span class="d-none d-lg-block">SMS Admin</span>
+                <span class="d-none d-sm-inline-block">SMS Admin</span>
+                <span class="mu-brand-sub d-none d-md-inline-block">MU</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <i class="bi bi-list toggle-sidebar-btn" title="Toggle Navigation"></i>
         </div><!-- End Logo -->
 
         <nav class="header-nav ms-auto">
@@ -99,8 +103,8 @@
             <li class="nav-heading">Main</li>
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">
-                    <i class="fa-solid fa-house-chimney fs-5 text-primary"></i>
+                <a class="nav-link @(currentController == "Home" ? "" : "collapsed")" asp-controller="Home" asp-action="Index">
+                    <i class="fa-solid fa-house-chimney fs-5"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
@@ -108,36 +112,36 @@
             <li class="nav-heading">Academic Management</li>
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Student" asp-action="StudentList">
-                    <i class="fa-solid fa-user-graduate fs-5 text-success"></i>
+                <a class="nav-link @(currentController == "Student" ? "" : "collapsed")" asp-controller="Student" asp-action="StudentList">
+                    <i class="fa-solid fa-user-graduate fs-5"></i>
                     <span>Students</span>
                 </a>
             </li><!-- End Students Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Attendance" asp-action="AttendanceList">
-                    <i class="fa-solid fa-clipboard-check fs-5 text-info"></i>
+                <a class="nav-link @(currentController == "Attendance" ? "" : "collapsed")" asp-controller="Attendance" asp-action="AttendanceList">
+                    <i class="fa-solid fa-clipboard-check fs-5"></i>
                     <span>Attendance</span>
                 </a>
             </li><!-- End Attendance Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Mark" asp-action="MarkList">
-                    <i class="fa-solid fa-award fs-5 text-warning"></i>
+                <a class="nav-link @(currentController == "Mark" ? "" : "collapsed")" asp-controller="Mark" asp-action="MarkList">
+                    <i class="fa-solid fa-award fs-5"></i>
                     <span>Examinations & Marks</span>
                 </a>
             </li><!-- End Marks Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Timetable" asp-action="TimetableList">
-                    <i class="fa-solid fa-calendar-days fs-5 text-primary"></i>
+                <a class="nav-link @(currentController == "Timetable" ? "" : "collapsed")" asp-controller="Timetable" asp-action="TimetableList">
+                    <i class="fa-solid fa-calendar-days fs-5"></i>
                     <span>Timetable & Schedule</span>
                 </a>
             </li><!-- End Timetable Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Enrollment" asp-action="EnrollmentList">
-                    <i class="fa-solid fa-users fs-5 text-danger"></i>
+                <a class="nav-link @(currentController == "Enrollment" ? "" : "collapsed")" asp-controller="Enrollment" asp-action="EnrollmentList">
+                    <i class="fa-solid fa-users fs-5"></i>
                     <span>Advising / Mentorship</span>
                 </a>
             </li><!-- End Enrollments Nav -->
@@ -145,29 +149,29 @@
             <li class="nav-heading">Campus Structure</li>
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Department" asp-action="Index">
-                    <i class="fa-solid fa-building fs-5 text-secondary"></i>
+                <a class="nav-link @(currentController == "Department" ? "" : "collapsed")" asp-controller="Department" asp-action="Index">
+                    <i class="fa-solid fa-building fs-5"></i>
                     <span>Departments</span>
                 </a>
             </li><!-- End Department Nav -->
             
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Course" asp-action="CourseList">
-                    <i class="fa-solid fa-graduation-cap fs-5 text-dark"></i>
+                <a class="nav-link @(currentController == "Course" ? "" : "collapsed")" asp-controller="Course" asp-action="CourseList">
+                    <i class="fa-solid fa-graduation-cap fs-5"></i>
                     <span>Courses</span>
                 </a>
             </li><!-- End Courses Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Classroom" asp-action="ClassroomList">
-                    <i class="fa-solid fa-school fs-5 text-primary"></i>
+                <a class="nav-link @(currentController == "Classroom" ? "" : "collapsed")" asp-controller="Classroom" asp-action="ClassroomList">
+                    <i class="fa-solid fa-school fs-5"></i>
                     <span>Classrooms & Labs</span>
                 </a>
             </li><!-- End Classrooms Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Staff" asp-action="StaffList">
-                    <i class="fa-solid fa-user-tie fs-5 text-success"></i>
+                <a class="nav-link @(currentController == "Staff" ? "" : "collapsed")" asp-controller="Staff" asp-action="StaffList">
+                    <i class="fa-solid fa-user-tie fs-5"></i>
                     <span>Faculty & Staff</span>
                 </a>
             </li><!-- End Staff Nav -->
@@ -175,15 +179,15 @@
             <li class="nav-heading">Communication & Security</li>
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Notice" asp-action="NoticeList">
-                    <i class="fa-solid fa-bullhorn fs-5 text-danger"></i>
+                <a class="nav-link @(currentController == "Notice" ? "" : "collapsed")" asp-controller="Notice" asp-action="NoticeList">
+                    <i class="fa-solid fa-bullhorn fs-5"></i>
                     <span>Notice Board</span>
                 </a>
             </li><!-- End Notice Board Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Auth" asp-action="ChangePassword">
-                    <i class="bi bi-shield-lock-fill fs-5 text-warning"></i>
+                <a class="nav-link @(currentController == "Auth" ? "" : "collapsed")" asp-controller="Auth" asp-action="ChangePassword">
+                    <i class="bi bi-shield-lock-fill fs-5"></i>
                     <span>Change Password</span>
                 </a>
             </li><!-- End Password Nav -->
@@ -191,6 +195,7 @@
         </ul>
 
     </aside><!-- End Sidebar-->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <main id="main" class="main">
 

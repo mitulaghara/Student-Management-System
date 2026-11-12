@@ -13,10 +13,10 @@
 
 <section class="section dashboard">
     <!-- Quick Statistics KPI Cards -->
-    <div class="row">
+    <div class="row g-3 mb-3">
         <!-- Students Card -->
-        <div class="col-xxl-3 col-md-6 mb-3">
-            <div class="card info-card sales-card h-100 shadow-sm border-0">
+        <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="card info-card sales-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
                     <h5 class="card-title">Students <span>| Total</span></h5>
                     <div class="d-flex align-items-center">
@@ -33,8 +33,8 @@
         </div>
 
         <!-- Faculty / Staff Card -->
-        <div class="col-xxl-3 col-md-6 mb-3">
-            <div class="card info-card revenue-card h-100 shadow-sm border-0">
+        <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="card info-card revenue-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
                     <h5 class="card-title">Staff / Faculty <span>| Total</span></h5>
                     <div class="d-flex align-items-center">
@@ -51,8 +51,8 @@
         </div>
 
         <!-- Courses Card -->
-        <div class="col-xxl-3 col-md-6 mb-3">
-            <div class="card info-card customers-card h-100 shadow-sm border-0">
+        <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="card info-card customers-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
                     <h5 class="card-title">Courses <span>| Active</span></h5>
                     <div class="d-flex align-items-center">
@@ -69,8 +69,8 @@
         </div>
 
         <!-- Attendance Card -->
-        <div class="col-xxl-3 col-md-6 mb-3">
-            <div class="card info-card h-100 shadow-sm border-0">
+        <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="card info-card h-100 shadow-sm border-0 mb-0">
                 <div class="card-body">
                     <h5 class="card-title">Attendance <span>| Logs</span></h5>
                     <div class="d-flex align-items-center">
@@ -88,9 +88,9 @@
     </div>
 
     <!-- Secondary Row: Secondary Stats -->
-    <div class="row">
-        <div class="col-lg-3 col-6 mb-3">
-            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-primary d-flex align-items-center justify-content-between">
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-primary d-flex align-items-center justify-content-between h-100">
                 <div>
                     <div class="text-muted small">Departments</div>
                     <div class="fs-5 fw-bold">@ViewBag.DepartmentCount</div>
@@ -98,8 +98,8 @@
                 <i class="fa-solid fa-building text-primary fs-3 opacity-50"></i>
             </div>
         </div>
-        <div class="col-lg-3 col-6 mb-3">
-            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-success d-flex align-items-center justify-content-between">
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-success d-flex align-items-center justify-content-between h-100">
                 <div>
                     <div class="text-muted small">Classrooms</div>
                     <div class="fs-5 fw-bold">@ViewBag.ClassroomCount</div>
@@ -107,8 +107,8 @@
                 <i class="fa-solid fa-school text-success fs-3 opacity-50"></i>
             </div>
         </div>
-        <div class="col-lg-3 col-6 mb-3">
-            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-warning d-flex align-items-center justify-content-between">
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-warning d-flex align-items-center justify-content-between h-100">
                 <div>
                     <div class="text-muted small">Marks Logged</div>
                     <div class="fs-5 fw-bold">@ViewBag.MarkCount</div>
@@ -116,8 +116,8 @@
                 <i class="fa-solid fa-award text-warning fs-3 opacity-50"></i>
             </div>
         </div>
-        <div class="col-lg-3 col-6 mb-3">
-            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-danger d-flex align-items-center justify-content-between">
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="p-3 bg-white rounded shadow-sm border-start border-4 border-danger d-flex align-items-center justify-content-between h-100">
                 <div>
                     <div class="text-muted small">Notices</div>
                     <div class="fs-5 fw-bold">@ViewBag.NoticeCount</div>
@@ -253,7 +253,7 @@
         var deptOptions = {
             chartArea: {width: '85%', height: '75%'},
             legend: {position: 'bottom'},
-            colors: ['#4154f1', '#2eca6a', '#ff771d', '#17a2b8', '#6f42c1'],
+            colors: ['#003366', '#f37021', '#008b9a', '#198754', '#5a6d87'],
             hAxis: {minValue: 0}
         };
 
@@ -271,11 +271,18 @@
         var attOptions = {
             pieHole: 0.5,
             chartArea: {width: '90%', height: '80%'},
-            colors: ['#2eca6a', '#dc3545', '#ffc107'],
+            colors: ['#008b9a', '#dc3545', '#f37021'],
             legend: {position: 'bottom'}
         };
 
         var attChart = new google.visualization.PieChart(document.getElementById('attendanceChart'));
         attChart.draw(attData, attOptions);
     }
+
+    // Auto-redraw charts on window resize / orientation change for 100% responsiveness
+    window.addEventListener('resize', function() {
+        if (typeof drawCharts === 'function' && typeof google !== 'undefined' && google.visualization) {
+            drawCharts();
+        }
+    });
 </script>
